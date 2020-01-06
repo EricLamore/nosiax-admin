@@ -1,0 +1,108 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-ra-record-heading">Create or edit a Ra Record</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_status">Status</label>
+                    <select class="form-control" name="status" formControlName="status" id="field_status">
+                        <option value="NONE">NONE</option>
+                        <option value="COMPLETE">COMPLETE</option>
+                        <option value="TO_SIGN">TO_SIGN</option>
+                        <option value="TO_VALIDATE">TO_VALIDATE</option>
+                        <option value="VALIDATE">VALIDATE</option>
+                        <option value="REJECTED">REJECTED</option>
+                        <option value="FAILED">FAILED</option>
+                    </select>
+                    <div *ngIf="editForm.get('status')!.invalid && (editForm.get('status')!.dirty || editForm.get('status')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('status')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_idUser">Id User</label>
+                    <input type="text" class="form-control" name="idUser" id="field_idUser"
+                           formControlName="idUser"/>
+                    <div *ngIf="editForm.get('idUser')!.invalid && (editForm.get('idUser')!.dirty || editForm.get('idUser')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('idUser')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_identifier">Identifier</label>
+                    <input type="text" class="form-control" name="identifier" id="field_identifier"
+                           formControlName="identifier"/>
+                    <div *ngIf="editForm.get('identifier')!.invalid && (editForm.get('identifier')!.dirty || editForm.get('identifier')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('identifier')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_certO">Cert O</label>
+                    <input type="text" class="form-control" name="certO" id="field_certO"
+                           formControlName="certO"/>
+                    <div *ngIf="editForm.get('certO')!.invalid && (editForm.get('certO')!.dirty || editForm.get('certO')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('certO')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_commonName">Common Name</label>
+                    <input type="text" class="form-control" name="commonName" id="field_commonName"
+                           formControlName="commonName"/>
+                    <div *ngIf="editForm.get('commonName')!.invalid && (editForm.get('commonName')!.dirty || editForm.get('commonName')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('commonName')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_locality">Locality</label>
+                    <input type="text" class="form-control" name="locality" id="field_locality"
+                           formControlName="locality"/>
+                    <div *ngIf="editForm.get('locality')!.invalid && (editForm.get('locality')!.dirty || editForm.get('locality')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('locality')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_country">Country</label>
+                    <input type="text" class="form-control" name="country" id="field_country"
+                           formControlName="country"/>
+                    <div *ngIf="editForm.get('country')!.invalid && (editForm.get('country')!.dirty || editForm.get('country')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('country')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
