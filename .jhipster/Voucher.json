@@ -1,0 +1,38 @@
+{
+    "name": "Voucher",
+    "fields": [
+        {
+            "fieldName": "fileName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "key",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "raRecord",
+            "otherEntityRelationshipName": "voutcher",
+            "relationshipName": "raRecord",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200106101106",
+    "entityTableName": "voucher",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}
