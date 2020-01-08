@@ -1,0 +1,63 @@
+<div>
+    <h2 id="page-heading">
+        <span>Additional Keys</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-additional-keys" [routerLink]="['/additional-keys/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create a new Additional Keys
+            </span>
+        </button>
+    </h2>
+    <jhi-alert-error></jhi-alert-error>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="alert alert-warning" *ngIf="additionalKeys?.length === 0">
+        <span>No additionalKeys found</span>
+    </div>
+    <div class="table-responsive" *ngIf="additionalKeys?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+            <tr>
+            <th scope="col" ><span>ID</span></th>
+            <th scope="col" ><span>Key</span></th>
+            <th scope="col" ><span>Value</span></th>
+            <th scope="col" ><span>Ra Record</span></th>
+            <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let additionalKeys of additionalKeys ;trackBy: trackId">
+                <td><a [routerLink]="['/additional-keys', additionalKeys.id, 'view' ]">{{additionalKeys.id}}</a></td>
+                <td>{{additionalKeys.key}}</td>
+                <td>{{additionalKeys.value}}</td>
+                <td>
+                    <div *ngIf="additionalKeys.raRecord">
+                        <a [routerLink]="['/ra-record', additionalKeys.raRecord?.id, 'view' ]" >{{additionalKeys.raRecord?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/additional-keys', additionalKeys.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/additional-keys', additionalKeys.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit" (click)="delete(additionalKeys)"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
