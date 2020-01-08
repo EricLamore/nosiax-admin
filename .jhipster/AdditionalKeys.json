@@ -1,0 +1,38 @@
+{
+    "name": "AdditionalKeys",
+    "fields": [
+        {
+            "fieldName": "key",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "value",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "raRecord",
+            "otherEntityRelationshipName": "additionalKeys",
+            "relationshipName": "raRecord",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200108081408",
+    "entityTableName": "additional_keys",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}
