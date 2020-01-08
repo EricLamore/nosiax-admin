@@ -42,6 +42,11 @@ public class CacheConfiguration {
             createCache(cm, com.universign.universigncs.nosiax.admin.cpm.domain.User.class.getName());
             createCache(cm, com.universign.universigncs.nosiax.admin.cpm.domain.Authority.class.getName());
             createCache(cm, com.universign.universigncs.nosiax.admin.cpm.domain.User.class.getName() + ".authorities");
+            createCache(cm, com.universign.universigncs.nosiax.admin.cpm.domain.RaRecord.class.getName());
+            createCache(cm, com.universign.universigncs.nosiax.admin.cpm.domain.RaRecord.class.getName() + ".voutchers");
+            createCache(cm, com.universign.universigncs.nosiax.admin.cpm.domain.RaRecord.class.getName() + ".additionalKeys");
+            createCache(cm, com.universign.universigncs.nosiax.admin.cpm.domain.Voucher.class.getName());
+            createCache(cm, com.universign.universigncs.nosiax.admin.cpm.domain.AdditionalKeys.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

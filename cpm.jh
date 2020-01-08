@@ -1,0 +1,47 @@
+entity RaRecord {
+	status Status required,
+    idUser String required,
+    identifier String required,
+    certO String required,
+    commonName String required,
+    locality String required,
+    country String required,
+    lastname String required,
+    firstname String required,
+    email String required,
+    phone String required,
+    url String,
+    idTransaction String,
+}
+
+entity Voucher {
+	fileName String required,
+	key String required,
+}
+
+entity AdditionalKeys {
+	key String required
+    value String required
+}
+
+enum Status {
+    NONE, COMPLETE, TO_SIGN, TO_VALIDATE, VALIDATE, REJECTED, FAILED
+}
+
+// defining multiple OneToMany relationships with comments
+relationship OneToMany {
+	RaRecord{voutcher} to Voucher,
+	RaRecord{additionalKeys} to AdditionalKeys
+}
+
+// Set pagination options
+paginate RaRecord with pagination
+
+// Use Data Transfert Objects (DTO)
+// dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl except Voucher, AdditionalKeys
+
+// Set an angular suffix
+// angularSuffix * with mySuffix
