@@ -1,6 +1,6 @@
 export const enum Status {
   NONE,
-  COMPLETE,
+  DRAFT,
   TO_SIGN,
   TO_VALIDATE,
   VALIDATE,

@@ -9,6 +9,7 @@ export interface IRaRecord {
   identifier?: string;
   certO?: string;
   commonName?: string;
+  zipCode?: string;
   locality?: string;
   country?: string;
   lastname?: string;
@@ -30,6 +31,7 @@ export class RaRecord implements IRaRecord {
     public identifier?: string,
     public certO?: string,
     public commonName?: string,
+    public zipCode?: string,
     public locality?: string,
     public country?: string,
     public lastname?: string,

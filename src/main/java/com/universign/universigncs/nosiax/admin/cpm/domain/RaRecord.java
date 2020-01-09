@@ -47,6 +47,10 @@ public class RaRecord implements Serializable {
     private String commonName;
 
     @NotNull
+    @Column(name = "zip_code", nullable = false)
+    private String zipCode;
+
+    @NotNull
     @Column(name = "locality", nullable = false)
     private String locality;
 
@@ -159,6 +163,19 @@ public class RaRecord implements Serializable {
 
     public void setCommonName(String commonName) {
         this.commonName = commonName;
+    }
+
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public RaRecord zipCode(String zipCode) {
+        this.zipCode = zipCode;
+        return this;
+    }
+
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
     }
 
     public String getLocality() {
@@ -354,6 +371,7 @@ public class RaRecord implements Serializable {
             ", identifier='" + getIdentifier() + "'" +
             ", certO='" + getCertO() + "'" +
             ", commonName='" + getCommonName() + "'" +
+            ", zipCode='" + getZipCode() + "'" +
             ", locality='" + getLocality() + "'" +
             ", country='" + getCountry() + "'" +
             ", lastname='" + getLastname() + "'" +

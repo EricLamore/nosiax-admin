@@ -36,6 +36,7 @@ describe('Service Tests', () => {
         'AAAAAAA',
         'AAAAAAA',
         'AAAAAAA',
+        'AAAAAAA',
         'AAAAAAA'
       );
     });
@@ -78,6 +79,7 @@ describe('Service Tests', () => {
             identifier: 'BBBBBB',
             certO: 'BBBBBB',
             commonName: 'BBBBBB',
+            zipCode: 'BBBBBB',
             locality: 'BBBBBB',
             country: 'BBBBBB',
             lastname: 'BBBBBB',
@@ -109,6 +111,7 @@ describe('Service Tests', () => {
             identifier: 'BBBBBB',
             certO: 'BBBBBB',
             commonName: 'BBBBBB',
+            zipCode: 'BBBBBB',
             locality: 'BBBBBB',
             country: 'BBBBBB',
             lastname: 'BBBBBB',

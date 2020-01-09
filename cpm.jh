@@ -4,6 +4,7 @@ entity RaRecord {
     identifier String required,
     certO String required,
     commonName String required,
+    zipCode String required,
     locality String required,
     country String required,
     lastname String required,
@@ -26,7 +27,7 @@ entity AdditionalKeys {
 }
 
 enum Status {
-    NONE, COMPLETE, TO_SIGN, TO_VALIDATE, VALIDATE, REJECTED, FAILED
+    NONE, DRAFT, TO_SIGN, TO_VALIDATE, VALIDATE, REJECTED, FAILED
 }
 
 // defining multiple OneToMany relationships with comments

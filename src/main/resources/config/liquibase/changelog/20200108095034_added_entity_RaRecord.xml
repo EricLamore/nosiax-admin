@@ -31,6 +31,9 @@
             <column name="common_name" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
+            <column name="zip_code" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
             <column name="locality" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
@@ -86,6 +89,7 @@
             <column name="identifier" type="string"/>
             <column name="cert_o" type="string"/>
             <column name="common_name" type="string"/>
+            <column name="zip_code" type="string"/>
             <column name="locality" type="string"/>
             <column name="country" type="string"/>
             <column name="lastname" type="string"/>
