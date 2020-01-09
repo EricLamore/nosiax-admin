@@ -13,7 +13,7 @@
                     <label class="form-control-label" for="field_status">Status</label>
                     <select class="form-control" name="status" formControlName="status" id="field_status">
                         <option value="NONE">NONE</option>
-                        <option value="COMPLETE">COMPLETE</option>
+                        <option value="DRAFT">DRAFT</option>
                         <option value="TO_SIGN">TO_SIGN</option>
                         <option value="TO_VALIDATE">TO_VALIDATE</option>
                         <option value="VALIDATE">VALIDATE</option>
@@ -67,6 +67,17 @@
                     <div *ngIf="editForm.get('commonName')!.invalid && (editForm.get('commonName')!.dirty || editForm.get('commonName')!.touched)">
                         <small class="form-text text-danger"
                                *ngIf="editForm.get('commonName')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_zipCode">Zip Code</label>
+                    <input type="text" class="form-control" name="zipCode" id="field_zipCode"
+                           formControlName="zipCode"/>
+                    <div *ngIf="editForm.get('zipCode')!.invalid && (editForm.get('zipCode')!.dirty || editForm.get('zipCode')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('zipCode')?.errors?.required">
                         This field is required.
                         </small>
                     </div>

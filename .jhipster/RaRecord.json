@@ -4,7 +4,7 @@
         {
             "fieldName": "status",
             "fieldType": "Status",
-            "fieldValues": "NONE,COMPLETE,TO_SIGN,TO_VALIDATE,VALIDATE,REJECTED,FAILED",
+            "fieldValues": "NONE,DRAFT,TO_SIGN,TO_VALIDATE,VALIDATE,REJECTED,FAILED",
             "fieldValidateRules": [
                 "required"
             ]
@@ -32,6 +32,13 @@
         },
         {
             "fieldName": "commonName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "zipCode",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required"

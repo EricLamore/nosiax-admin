@@ -36,7 +36,7 @@ import com.universign.universigncs.nosiax.admin.cpm.domain.enumeration.Status;
 public class RaRecordResourceIT {
 
     private static final Status DEFAULT_STATUS = Status.NONE;
-    private static final Status UPDATED_STATUS = Status.COMPLETE;
+    private static final Status UPDATED_STATUS = Status.DRAFT;
 
     private static final String DEFAULT_ID_USER = "AAAAAAAAAA";
     private static final String UPDATED_ID_USER = "BBBBBBBBBB";
@@ -49,6 +49,9 @@ public class RaRecordResourceIT {
 
     private static final String DEFAULT_COMMON_NAME = "AAAAAAAAAA";
     private static final String UPDATED_COMMON_NAME = "BBBBBBBBBB";
+
+    private static final String DEFAULT_ZIP_CODE = "AAAAAAAAAA";
+    private static final String UPDATED_ZIP_CODE = "BBBBBBBBBB";
 
     private static final String DEFAULT_LOCALITY = "AAAAAAAAAA";
     private static final String UPDATED_LOCALITY = "BBBBBBBBBB";
@@ -127,6 +130,7 @@ public class RaRecordResourceIT {
             .identifier(DEFAULT_IDENTIFIER)
             .certO(DEFAULT_CERT_O)
             .commonName(DEFAULT_COMMON_NAME)
+            .zipCode(DEFAULT_ZIP_CODE)
             .locality(DEFAULT_LOCALITY)
             .country(DEFAULT_COUNTRY)
             .lastname(DEFAULT_LASTNAME)
@@ -151,6 +155,7 @@ public class RaRecordResourceIT {
             .identifier(UPDATED_IDENTIFIER)
             .certO(UPDATED_CERT_O)
             .commonName(UPDATED_COMMON_NAME)
+            .zipCode(UPDATED_ZIP_CODE)
             .locality(UPDATED_LOCALITY)
             .country(UPDATED_COUNTRY)
             .lastname(UPDATED_LASTNAME)
@@ -188,6 +193,7 @@ public class RaRecordResourceIT {
         assertThat(testRaRecord.getIdentifier()).isEqualTo(DEFAULT_IDENTIFIER);
         assertThat(testRaRecord.getCertO()).isEqualTo(DEFAULT_CERT_O);
         assertThat(testRaRecord.getCommonName()).isEqualTo(DEFAULT_COMMON_NAME);
+        assertThat(testRaRecord.getZipCode()).isEqualTo(DEFAULT_ZIP_CODE);
         assertThat(testRaRecord.getLocality()).isEqualTo(DEFAULT_LOCALITY);
         assertThat(testRaRecord.getCountry()).isEqualTo(DEFAULT_COUNTRY);
         assertThat(testRaRecord.getLastname()).isEqualTo(DEFAULT_LASTNAME);
@@ -297,6 +303,24 @@ public class RaRecordResourceIT {
         int databaseSizeBeforeTest = raRecordRepository.findAll().size();
         // set the field null
         raRecord.setCommonName(null);
+
+        // Create the RaRecord, which fails.
+
+        restRaRecordMockMvc.perform(post("/api/ra-records")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(raRecord)))
+            .andExpect(status().isBadRequest());
+
+        List<RaRecord> raRecordList = raRecordRepository.findAll();
+        assertThat(raRecordList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkZipCodeIsRequired() throws Exception {
+        int databaseSizeBeforeTest = raRecordRepository.findAll().size();
+        // set the field null
+        raRecord.setZipCode(null);
 
         // Create the RaRecord, which fails.
 
@@ -433,6 +457,7 @@ public class RaRecordResourceIT {
             .andExpect(jsonPath("$.[*].identifier").value(hasItem(DEFAULT_IDENTIFIER)))
             .andExpect(jsonPath("$.[*].certO").value(hasItem(DEFAULT_CERT_O)))
             .andExpect(jsonPath("$.[*].commonName").value(hasItem(DEFAULT_COMMON_NAME)))
+            .andExpect(jsonPath("$.[*].zipCode").value(hasItem(DEFAULT_ZIP_CODE)))
             .andExpect(jsonPath("$.[*].locality").value(hasItem(DEFAULT_LOCALITY)))
             .andExpect(jsonPath("$.[*].country").value(hasItem(DEFAULT_COUNTRY)))
             .andExpect(jsonPath("$.[*].lastname").value(hasItem(DEFAULT_LASTNAME)))
@@ -460,6 +485,7 @@ public class RaRecordResourceIT {
             .andExpect(jsonPath("$.identifier").value(DEFAULT_IDENTIFIER))
             .andExpect(jsonPath("$.certO").value(DEFAULT_CERT_O))
             .andExpect(jsonPath("$.commonName").value(DEFAULT_COMMON_NAME))
+            .andExpect(jsonPath("$.zipCode").value(DEFAULT_ZIP_CODE))
             .andExpect(jsonPath("$.locality").value(DEFAULT_LOCALITY))
             .andExpect(jsonPath("$.country").value(DEFAULT_COUNTRY))
             .andExpect(jsonPath("$.lastname").value(DEFAULT_LASTNAME))
@@ -497,6 +523,7 @@ public class RaRecordResourceIT {
             .identifier(UPDATED_IDENTIFIER)
             .certO(UPDATED_CERT_O)
             .commonName(UPDATED_COMMON_NAME)
+            .zipCode(UPDATED_ZIP_CODE)
             .locality(UPDATED_LOCALITY)
             .country(UPDATED_COUNTRY)
             .lastname(UPDATED_LASTNAME)
@@ -521,6 +548,7 @@ public class RaRecordResourceIT {
         assertThat(testRaRecord.getIdentifier()).isEqualTo(UPDATED_IDENTIFIER);
         assertThat(testRaRecord.getCertO()).isEqualTo(UPDATED_CERT_O);
         assertThat(testRaRecord.getCommonName()).isEqualTo(UPDATED_COMMON_NAME);
+        assertThat(testRaRecord.getZipCode()).isEqualTo(UPDATED_ZIP_CODE);
         assertThat(testRaRecord.getLocality()).isEqualTo(UPDATED_LOCALITY);
         assertThat(testRaRecord.getCountry()).isEqualTo(UPDATED_COUNTRY);
         assertThat(testRaRecord.getLastname()).isEqualTo(UPDATED_LASTNAME);
