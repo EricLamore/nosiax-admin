@@ -17,6 +17,7 @@ export class RaRecordUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
+    idxAgency: [null, [Validators.required]],
     status: [null, [Validators.required]],
     idUser: [null, [Validators.required]],
     identifier: [null, [Validators.required]],
@@ -45,6 +46,7 @@ export class RaRecordUpdateComponent implements OnInit {
   updateForm(raRecord: IRaRecord): void {
     this.editForm.patchValue({
       id: raRecord.id,
+      idxAgency: raRecord.idxAgency,
       status: raRecord.status,
       idUser: raRecord.idUser,
       identifier: raRecord.identifier,
@@ -81,6 +83,7 @@ export class RaRecordUpdateComponent implements OnInit {
     return {
       ...new RaRecord(),
       id: this.editForm.get(['id'])!.value,
+      idxAgency: this.editForm.get(['idxAgency'])!.value,
       status: this.editForm.get(['status'])!.value,
       idUser: this.editForm.get(['idUser'])!.value,
       identifier: this.editForm.get(['identifier'])!.value,

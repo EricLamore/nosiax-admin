@@ -2,6 +2,13 @@
     "name": "RaRecord",
     "fields": [
         {
+            "fieldName": "idxAgency",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
             "fieldName": "status",
             "fieldType": "Status",
             "fieldValues": "NONE,DRAFT,TO_SIGN,TO_VALIDATE,VALIDATE,REJECTED,FAILED",

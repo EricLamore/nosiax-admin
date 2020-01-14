@@ -19,6 +19,7 @@
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
             <th scope="col"  jhiSortBy="id"><span>ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="idxAgency"><span>Idx Agency</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="status"><span>Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="idUser"><span>Id User</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="identifier"><span>Identifier</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -40,6 +41,7 @@
             <tbody>
             <tr *ngFor="let raRecord of raRecords ;trackBy: trackId">
                 <td><a [routerLink]="['/ra-record', raRecord.id, 'view' ]">{{raRecord.id}}</a></td>
+                <td>{{raRecord.idxAgency}}</td>
                 <td>{{raRecord.status}}</td>
                 <td>{{raRecord.idUser}}</td>
                 <td>{{raRecord.identifier}}</td>

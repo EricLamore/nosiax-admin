@@ -26,6 +26,10 @@ public class RaRecord implements Serializable {
     private Long id;
 
     @NotNull
+    @Column(name = "idx_agency", nullable = false)
+    private Integer idxAgency;
+
+    @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
     private Status status;
@@ -98,6 +102,19 @@ public class RaRecord implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Integer getIdxAgency() {
+        return idxAgency;
+    }
+
+    public RaRecord idxAgency(Integer idxAgency) {
+        this.idxAgency = idxAgency;
+        return this;
+    }
+
+    public void setIdxAgency(Integer idxAgency) {
+        this.idxAgency = idxAgency;
     }
 
     public Status getStatus() {
@@ -366,6 +383,7 @@ public class RaRecord implements Serializable {
     public String toString() {
         return "RaRecord{" +
             "id=" + getId() +
+            ", idxAgency=" + getIdxAgency() +
             ", status='" + getStatus() + "'" +
             ", idUser='" + getIdUser() + "'" +
             ", identifier='" + getIdentifier() + "'" +
