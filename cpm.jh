@@ -1,4 +1,5 @@
 entity RaRecord {
+	idxAgency Integer required
 	status Status required,
     idUser String required,
     identifier String required,

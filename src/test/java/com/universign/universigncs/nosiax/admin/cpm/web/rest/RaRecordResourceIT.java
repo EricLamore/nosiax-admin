@@ -35,6 +35,9 @@ import com.universign.universigncs.nosiax.admin.cpm.domain.enumeration.Status;
 @SpringBootTest(classes = AdminNosiaxApp.class)
 public class RaRecordResourceIT {
 
+    private static final Integer DEFAULT_IDX_AGENCY = 1;
+    private static final Integer UPDATED_IDX_AGENCY = 2;
+
     private static final Status DEFAULT_STATUS = Status.NONE;
     private static final Status UPDATED_STATUS = Status.DRAFT;
 
@@ -125,6 +128,7 @@ public class RaRecordResourceIT {
      */
     public static RaRecord createEntity(EntityManager em) {
         RaRecord raRecord = new RaRecord()
+            .idxAgency(DEFAULT_IDX_AGENCY)
             .status(DEFAULT_STATUS)
             .idUser(DEFAULT_ID_USER)
             .identifier(DEFAULT_IDENTIFIER)
@@ -150,6 +154,7 @@ public class RaRecordResourceIT {
      */
     public static RaRecord createUpdatedEntity(EntityManager em) {
         RaRecord raRecord = new RaRecord()
+            .idxAgency(UPDATED_IDX_AGENCY)
             .status(UPDATED_STATUS)
             .idUser(UPDATED_ID_USER)
             .identifier(UPDATED_IDENTIFIER)
@@ -188,6 +193,7 @@ public class RaRecordResourceIT {
         List<RaRecord> raRecordList = raRecordRepository.findAll();
         assertThat(raRecordList).hasSize(databaseSizeBeforeCreate + 1);
         RaRecord testRaRecord = raRecordList.get(raRecordList.size() - 1);
+        assertThat(testRaRecord.getIdxAgency()).isEqualTo(DEFAULT_IDX_AGENCY);
         assertThat(testRaRecord.getStatus()).isEqualTo(DEFAULT_STATUS);
         assertThat(testRaRecord.getIdUser()).isEqualTo(DEFAULT_ID_USER);
         assertThat(testRaRecord.getIdentifier()).isEqualTo(DEFAULT_IDENTIFIER);
@@ -224,6 +230,24 @@ public class RaRecordResourceIT {
         assertThat(raRecordList).hasSize(databaseSizeBeforeCreate);
     }
 
+
+    @Test
+    @Transactional
+    public void checkIdxAgencyIsRequired() throws Exception {
+        int databaseSizeBeforeTest = raRecordRepository.findAll().size();
+        // set the field null
+        raRecord.setIdxAgency(null);
+
+        // Create the RaRecord, which fails.
+
+        restRaRecordMockMvc.perform(post("/api/ra-records")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(raRecord)))
+            .andExpect(status().isBadRequest());
+
+        List<RaRecord> raRecordList = raRecordRepository.findAll();
+        assertThat(raRecordList).hasSize(databaseSizeBeforeTest);
+    }
 
     @Test
     @Transactional
@@ -452,6 +476,7 @@ public class RaRecordResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(raRecord.getId().intValue())))
+            .andExpect(jsonPath("$.[*].idxAgency").value(hasItem(DEFAULT_IDX_AGENCY)))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
             .andExpect(jsonPath("$.[*].idUser").value(hasItem(DEFAULT_ID_USER)))
             .andExpect(jsonPath("$.[*].identifier").value(hasItem(DEFAULT_IDENTIFIER)))
@@ -480,6 +505,7 @@ public class RaRecordResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(raRecord.getId().intValue()))
+            .andExpect(jsonPath("$.idxAgency").value(DEFAULT_IDX_AGENCY))
             .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()))
             .andExpect(jsonPath("$.idUser").value(DEFAULT_ID_USER))
             .andExpect(jsonPath("$.identifier").value(DEFAULT_IDENTIFIER))
@@ -518,6 +544,7 @@ public class RaRecordResourceIT {
         // Disconnect from session so that the updates on updatedRaRecord are not directly saved in db
         em.detach(updatedRaRecord);
         updatedRaRecord
+            .idxAgency(UPDATED_IDX_AGENCY)
             .status(UPDATED_STATUS)
             .idUser(UPDATED_ID_USER)
             .identifier(UPDATED_IDENTIFIER)
@@ -543,6 +570,7 @@ public class RaRecordResourceIT {
         List<RaRecord> raRecordList = raRecordRepository.findAll();
         assertThat(raRecordList).hasSize(databaseSizeBeforeUpdate);
         RaRecord testRaRecord = raRecordList.get(raRecordList.size() - 1);
+        assertThat(testRaRecord.getIdxAgency()).isEqualTo(UPDATED_IDX_AGENCY);
         assertThat(testRaRecord.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testRaRecord.getIdUser()).isEqualTo(UPDATED_ID_USER);
         assertThat(testRaRecord.getIdentifier()).isEqualTo(UPDATED_IDENTIFIER);

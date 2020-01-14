@@ -4,6 +4,7 @@ import { Status } from 'app/shared/model/enumerations/status.model';
 
 export interface IRaRecord {
   id?: number;
+  idxAgency?: number;
   status?: Status;
   idUser?: string;
   identifier?: string;
@@ -26,6 +27,7 @@ export interface IRaRecord {
 export class RaRecord implements IRaRecord {
   constructor(
     public id?: number,
+    public idxAgency?: number,
     public status?: Status,
     public idUser?: string,
     public identifier?: string,

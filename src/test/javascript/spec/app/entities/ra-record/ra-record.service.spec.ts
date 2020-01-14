@@ -23,6 +23,7 @@ describe('Service Tests', () => {
 
       elemDefault = new RaRecord(
         0,
+        0,
         Status.NONE,
         'AAAAAAA',
         'AAAAAAA',
@@ -74,6 +75,7 @@ describe('Service Tests', () => {
       it('should update a RaRecord', () => {
         const returnedFromService = Object.assign(
           {
+            idxAgency: 1,
             status: 'BBBBBB',
             idUser: 'BBBBBB',
             identifier: 'BBBBBB',
@@ -106,6 +108,7 @@ describe('Service Tests', () => {
       it('should return a list of RaRecord', () => {
         const returnedFromService = Object.assign(
           {
+            idxAgency: 1,
             status: 'BBBBBB',
             idUser: 'BBBBBB',
             identifier: 'BBBBBB',
