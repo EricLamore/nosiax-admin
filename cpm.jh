@@ -1,5 +1,4 @@
 entity RaRecord {
-	idxAgency Integer required
 	status Status required,
     idUser String required,
     identifier String required,
@@ -14,7 +13,11 @@ entity RaRecord {
     phone String required,
     url String,
     idTransaction String,
+    transactionStatus String,
     profilCpm String,
+    reaso String,
+    signatureDate ZonedDateTime,
+    validationDate ZonedDateTime,
 }
 
 entity Voucher {
@@ -28,7 +31,7 @@ entity AdditionalKeys {
 }
 
 enum Status {
-    NONE, DRAFT, TO_SIGN, TO_VALIDATE, VALIDATE, REJECTED, FAILED
+    DRAFT, TO_SIGN, TO_VALIDATE, VALIDATE, REJECTED, FAILED
 }
 
 // defining multiple OneToMany relationships with comments
