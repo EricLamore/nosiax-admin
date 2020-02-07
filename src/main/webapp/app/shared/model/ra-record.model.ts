@@ -1,10 +1,10 @@
+import { Moment } from 'moment';
 import { IVoucher } from 'app/shared/model/voucher.model';
 import { IAdditionalKeys } from 'app/shared/model/additional-keys.model';
 import { Status } from 'app/shared/model/enumerations/status.model';
 
 export interface IRaRecord {
   id?: number;
-  idxAgency?: number;
   status?: Status;
   idUser?: string;
   identifier?: string;
@@ -19,7 +19,11 @@ export interface IRaRecord {
   phone?: string;
   url?: string;
   idTransaction?: string;
+  transactionStatus?: string;
   profilCpm?: string;
+  reaso?: string;
+  signatureDate?: Moment;
+  validationDate?: Moment;
   voutchers?: IVoucher[];
   additionalKeys?: IAdditionalKeys[];
 }
@@ -27,7 +31,6 @@ export interface IRaRecord {
 export class RaRecord implements IRaRecord {
   constructor(
     public id?: number,
-    public idxAgency?: number,
     public status?: Status,
     public idUser?: string,
     public identifier?: string,
@@ -42,7 +45,11 @@ export class RaRecord implements IRaRecord {
     public phone?: string,
     public url?: string,
     public idTransaction?: string,
+    public transactionStatus?: string,
     public profilCpm?: string,
+    public reaso?: string,
+    public signatureDate?: Moment,
+    public validationDate?: Moment,
     public voutchers?: IVoucher[],
     public additionalKeys?: IAdditionalKeys[]
   ) {}

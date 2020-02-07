@@ -13,9 +13,7 @@ export class RaRecordDetailComponent implements OnInit {
   constructor(protected activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ raRecord }) => {
-      this.raRecord = raRecord;
-    });
+    this.activatedRoute.data.subscribe(({ raRecord }) => (this.raRecord = raRecord));
   }
 
   previousState(): void {

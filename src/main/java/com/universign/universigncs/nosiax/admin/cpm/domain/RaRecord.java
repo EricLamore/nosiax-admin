@@ -1,4 +1,5 @@
 package com.universign.universigncs.nosiax.admin.cpm.domain;
+
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -6,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
+import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,10 +26,6 @@ public class RaRecord implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @NotNull
-    @Column(name = "idx_agency", nullable = false)
-    private Integer idxAgency;
 
     @NotNull
     @Enumerated(EnumType.STRING)
@@ -84,8 +82,20 @@ public class RaRecord implements Serializable {
     @Column(name = "id_transaction")
     private String idTransaction;
 
+    @Column(name = "transaction_status")
+    private String transactionStatus;
+
     @Column(name = "profil_cpm")
     private String profilCpm;
+
+    @Column(name = "reaso")
+    private String reaso;
+
+    @Column(name = "signature_date")
+    private ZonedDateTime signatureDate;
+
+    @Column(name = "validation_date")
+    private ZonedDateTime validationDate;
 
     @OneToMany(mappedBy = "raRecord")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -102,19 +112,6 @@ public class RaRecord implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Integer getIdxAgency() {
-        return idxAgency;
-    }
-
-    public RaRecord idxAgency(Integer idxAgency) {
-        this.idxAgency = idxAgency;
-        return this;
-    }
-
-    public void setIdxAgency(Integer idxAgency) {
-        this.idxAgency = idxAgency;
     }
 
     public Status getStatus() {
@@ -299,6 +296,19 @@ public class RaRecord implements Serializable {
         this.idTransaction = idTransaction;
     }
 
+    public String getTransactionStatus() {
+        return transactionStatus;
+    }
+
+    public RaRecord transactionStatus(String transactionStatus) {
+        this.transactionStatus = transactionStatus;
+        return this;
+    }
+
+    public void setTransactionStatus(String transactionStatus) {
+        this.transactionStatus = transactionStatus;
+    }
+
     public String getProfilCpm() {
         return profilCpm;
     }
@@ -310,6 +320,45 @@ public class RaRecord implements Serializable {
 
     public void setProfilCpm(String profilCpm) {
         this.profilCpm = profilCpm;
+    }
+
+    public String getReaso() {
+        return reaso;
+    }
+
+    public RaRecord reaso(String reaso) {
+        this.reaso = reaso;
+        return this;
+    }
+
+    public void setReaso(String reaso) {
+        this.reaso = reaso;
+    }
+
+    public ZonedDateTime getSignatureDate() {
+        return signatureDate;
+    }
+
+    public RaRecord signatureDate(ZonedDateTime signatureDate) {
+        this.signatureDate = signatureDate;
+        return this;
+    }
+
+    public void setSignatureDate(ZonedDateTime signatureDate) {
+        this.signatureDate = signatureDate;
+    }
+
+    public ZonedDateTime getValidationDate() {
+        return validationDate;
+    }
+
+    public RaRecord validationDate(ZonedDateTime validationDate) {
+        this.validationDate = validationDate;
+        return this;
+    }
+
+    public void setValidationDate(ZonedDateTime validationDate) {
+        this.validationDate = validationDate;
     }
 
     public Set<Voucher> getVoutchers() {
@@ -383,7 +432,6 @@ public class RaRecord implements Serializable {
     public String toString() {
         return "RaRecord{" +
             "id=" + getId() +
-            ", idxAgency=" + getIdxAgency() +
             ", status='" + getStatus() + "'" +
             ", idUser='" + getIdUser() + "'" +
             ", identifier='" + getIdentifier() + "'" +
@@ -398,7 +446,11 @@ public class RaRecord implements Serializable {
             ", phone='" + getPhone() + "'" +
             ", url='" + getUrl() + "'" +
             ", idTransaction='" + getIdTransaction() + "'" +
+            ", transactionStatus='" + getTransactionStatus() + "'" +
             ", profilCpm='" + getProfilCpm() + "'" +
+            ", reaso='" + getReaso() + "'" +
+            ", signatureDate='" + getSignatureDate() + "'" +
+            ", validationDate='" + getValidationDate() + "'" +
             "}";
     }
 }

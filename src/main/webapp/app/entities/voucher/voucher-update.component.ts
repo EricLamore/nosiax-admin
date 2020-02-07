@@ -4,7 +4,6 @@ import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 import { IVoucher, Voucher } from 'app/shared/model/voucher.model';
 import { VoucherService } from './voucher.service';
@@ -17,7 +16,6 @@ import { RaRecordService } from 'app/entities/ra-record/ra-record.service';
 })
 export class VoucherUpdateComponent implements OnInit {
   isSaving = false;
-
   rarecords: IRaRecord[] = [];
 
   editForm = this.fb.group({
@@ -38,14 +36,7 @@ export class VoucherUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ voucher }) => {
       this.updateForm(voucher);
 
-      this.raRecordService
-        .query()
-        .pipe(
-          map((res: HttpResponse<IRaRecord[]>) => {
-            return res.body ? res.body : [];
-          })
-        )
-        .subscribe((resBody: IRaRecord[]) => (this.rarecords = resBody));
+      this.raRecordService.query().subscribe((res: HttpResponse<IRaRecord[]>) => (this.rarecords = res.body || []));
     });
   }
 

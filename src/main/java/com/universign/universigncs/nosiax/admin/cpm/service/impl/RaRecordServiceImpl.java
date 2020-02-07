@@ -53,7 +53,6 @@ public class RaRecordServiceImpl implements RaRecordService {
         return raRecordRepository.findAll(pageable);
     }
 
-
     /**
      * Get one raRecord by id.
      *

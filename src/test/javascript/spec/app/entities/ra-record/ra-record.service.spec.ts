@@ -1,6 +1,7 @@
 import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { take, map } from 'rxjs/operators';
+import * as moment from 'moment';
+import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { RaRecordService } from 'app/entities/ra-record/ra-record.service';
 import { IRaRecord, RaRecord } from 'app/shared/model/ra-record.model';
 import { Status } from 'app/shared/model/enumerations/status.model';
@@ -12,6 +13,8 @@ describe('Service Tests', () => {
     let httpMock: HttpTestingController;
     let elemDefault: IRaRecord;
     let expectedResult: IRaRecord | IRaRecord[] | boolean | null;
+    let currentDate: moment.Moment;
+
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [HttpClientTestingModule]
@@ -20,11 +23,11 @@ describe('Service Tests', () => {
       injector = getTestBed();
       service = injector.get(RaRecordService);
       httpMock = injector.get(HttpTestingController);
+      currentDate = moment();
 
       elemDefault = new RaRecord(
         0,
-        0,
-        Status.NONE,
+        Status.DRAFT,
         'AAAAAAA',
         'AAAAAAA',
         'AAAAAAA',
@@ -38,17 +41,25 @@ describe('Service Tests', () => {
         'AAAAAAA',
         'AAAAAAA',
         'AAAAAAA',
-        'AAAAAAA'
+        'AAAAAAA',
+        'AAAAAAA',
+        'AAAAAAA',
+        currentDate,
+        currentDate
       );
     });
 
     describe('Service methods', () => {
       it('should find an element', () => {
-        const returnedFromService = Object.assign({}, elemDefault);
-        service
-          .find(123)
-          .pipe(take(1))
-          .subscribe(resp => (expectedResult = resp.body));
+        const returnedFromService = Object.assign(
+          {
+            signatureDate: currentDate.format(DATE_TIME_FORMAT),
+            validationDate: currentDate.format(DATE_TIME_FORMAT)
+          },
+          elemDefault
+        );
+
+        service.find(123).subscribe(resp => (expectedResult = resp.body));
 
         const req = httpMock.expectOne({ method: 'GET' });
         req.flush(returnedFromService);
@@ -58,15 +69,23 @@ describe('Service Tests', () => {
       it('should create a RaRecord', () => {
         const returnedFromService = Object.assign(
           {
-            id: 0
+            id: 0,
+            signatureDate: currentDate.format(DATE_TIME_FORMAT),
+            validationDate: currentDate.format(DATE_TIME_FORMAT)
           },
           elemDefault
         );
-        const expected = Object.assign({}, returnedFromService);
-        service
-          .create(new RaRecord())
-          .pipe(take(1))
-          .subscribe(resp => (expectedResult = resp.body));
+
+        const expected = Object.assign(
+          {
+            signatureDate: currentDate,
+            validationDate: currentDate
+          },
+          returnedFromService
+        );
+
+        service.create(new RaRecord()).subscribe(resp => (expectedResult = resp.body));
+
         const req = httpMock.expectOne({ method: 'POST' });
         req.flush(returnedFromService);
         expect(expectedResult).toMatchObject(expected);
@@ -75,7 +94,6 @@ describe('Service Tests', () => {
       it('should update a RaRecord', () => {
         const returnedFromService = Object.assign(
           {
-            idxAgency: 1,
             status: 'BBBBBB',
             idUser: 'BBBBBB',
             identifier: 'BBBBBB',
@@ -90,16 +108,25 @@ describe('Service Tests', () => {
             phone: 'BBBBBB',
             url: 'BBBBBB',
             idTransaction: 'BBBBBB',
-            profilCpm: 'BBBBBB'
+            transactionStatus: 'BBBBBB',
+            profilCpm: 'BBBBBB',
+            reaso: 'BBBBBB',
+            signatureDate: currentDate.format(DATE_TIME_FORMAT),
+            validationDate: currentDate.format(DATE_TIME_FORMAT)
           },
           elemDefault
         );
 
-        const expected = Object.assign({}, returnedFromService);
-        service
-          .update(expected)
-          .pipe(take(1))
-          .subscribe(resp => (expectedResult = resp.body));
+        const expected = Object.assign(
+          {
+            signatureDate: currentDate,
+            validationDate: currentDate
+          },
+          returnedFromService
+        );
+
+        service.update(expected).subscribe(resp => (expectedResult = resp.body));
+
         const req = httpMock.expectOne({ method: 'PUT' });
         req.flush(returnedFromService);
         expect(expectedResult).toMatchObject(expected);
@@ -108,7 +135,6 @@ describe('Service Tests', () => {
       it('should return a list of RaRecord', () => {
         const returnedFromService = Object.assign(
           {
-            idxAgency: 1,
             status: 'BBBBBB',
             idUser: 'BBBBBB',
             identifier: 'BBBBBB',
@@ -123,18 +149,25 @@ describe('Service Tests', () => {
             phone: 'BBBBBB',
             url: 'BBBBBB',
             idTransaction: 'BBBBBB',
-            profilCpm: 'BBBBBB'
+            transactionStatus: 'BBBBBB',
+            profilCpm: 'BBBBBB',
+            reaso: 'BBBBBB',
+            signatureDate: currentDate.format(DATE_TIME_FORMAT),
+            validationDate: currentDate.format(DATE_TIME_FORMAT)
           },
           elemDefault
         );
-        const expected = Object.assign({}, returnedFromService);
-        service
-          .query()
-          .pipe(
-            take(1),
-            map(resp => resp.body)
-          )
-          .subscribe(body => (expectedResult = body));
+
+        const expected = Object.assign(
+          {
+            signatureDate: currentDate,
+            validationDate: currentDate
+          },
+          returnedFromService
+        );
+
+        service.query().subscribe(resp => (expectedResult = resp.body));
+
         const req = httpMock.expectOne({ method: 'GET' });
         req.flush([returnedFromService]);
         httpMock.verify();
