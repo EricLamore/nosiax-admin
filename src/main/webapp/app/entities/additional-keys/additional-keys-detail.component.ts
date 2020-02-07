@@ -13,9 +13,7 @@ export class AdditionalKeysDetailComponent implements OnInit {
   constructor(protected activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ additionalKeys }) => {
-      this.additionalKeys = additionalKeys;
-    });
+    this.activatedRoute.data.subscribe(({ additionalKeys }) => (this.additionalKeys = additionalKeys));
   }
 
   previousState(): void {

@@ -110,7 +110,7 @@ public class VoucherResourceIT {
 
         // Create the Voucher
         restVoucherMockMvc.perform(post("/api/vouchers")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(TestUtil.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(voucher)))
             .andExpect(status().isCreated());
 
@@ -132,7 +132,7 @@ public class VoucherResourceIT {
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restVoucherMockMvc.perform(post("/api/vouchers")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(TestUtil.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(voucher)))
             .andExpect(status().isBadRequest());
 
@@ -152,7 +152,7 @@ public class VoucherResourceIT {
         // Create the Voucher, which fails.
 
         restVoucherMockMvc.perform(post("/api/vouchers")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(TestUtil.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(voucher)))
             .andExpect(status().isBadRequest());
 
@@ -170,7 +170,7 @@ public class VoucherResourceIT {
         // Create the Voucher, which fails.
 
         restVoucherMockMvc.perform(post("/api/vouchers")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(TestUtil.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(voucher)))
             .andExpect(status().isBadRequest());
 
@@ -187,7 +187,7 @@ public class VoucherResourceIT {
         // Get all the voucherList
         restVoucherMockMvc.perform(get("/api/vouchers?sort=id,desc"))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(voucher.getId().intValue())))
             .andExpect(jsonPath("$.[*].fileName").value(hasItem(DEFAULT_FILE_NAME)))
             .andExpect(jsonPath("$.[*].key").value(hasItem(DEFAULT_KEY)));
@@ -202,7 +202,7 @@ public class VoucherResourceIT {
         // Get the voucher
         restVoucherMockMvc.perform(get("/api/vouchers/{id}", voucher.getId()))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(voucher.getId().intValue()))
             .andExpect(jsonPath("$.fileName").value(DEFAULT_FILE_NAME))
             .andExpect(jsonPath("$.key").value(DEFAULT_KEY));
@@ -233,7 +233,7 @@ public class VoucherResourceIT {
             .key(UPDATED_KEY);
 
         restVoucherMockMvc.perform(put("/api/vouchers")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(TestUtil.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(updatedVoucher)))
             .andExpect(status().isOk());
 
@@ -254,7 +254,7 @@ public class VoucherResourceIT {
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restVoucherMockMvc.perform(put("/api/vouchers")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(TestUtil.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(voucher)))
             .andExpect(status().isBadRequest());
 
@@ -273,7 +273,7 @@ public class VoucherResourceIT {
 
         // Delete the voucher
         restVoucherMockMvc.perform(delete("/api/vouchers/{id}", voucher.getId())
-            .accept(TestUtil.APPLICATION_JSON_UTF8))
+            .accept(TestUtil.APPLICATION_JSON))
             .andExpect(status().isNoContent());
 
         // Validate the database contains one less item

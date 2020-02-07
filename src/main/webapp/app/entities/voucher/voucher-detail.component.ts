@@ -13,9 +13,7 @@ export class VoucherDetailComponent implements OnInit {
   constructor(protected activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ voucher }) => {
-      this.voucher = voucher;
-    });
+    this.activatedRoute.data.subscribe(({ voucher }) => (this.voucher = voucher));
   }
 
   previousState(): void {

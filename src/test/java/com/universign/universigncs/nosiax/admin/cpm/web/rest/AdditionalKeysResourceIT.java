@@ -110,7 +110,7 @@ public class AdditionalKeysResourceIT {
 
         // Create the AdditionalKeys
         restAdditionalKeysMockMvc.perform(post("/api/additional-keys")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(TestUtil.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(additionalKeys)))
             .andExpect(status().isCreated());
 
@@ -132,7 +132,7 @@ public class AdditionalKeysResourceIT {
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restAdditionalKeysMockMvc.perform(post("/api/additional-keys")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(TestUtil.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(additionalKeys)))
             .andExpect(status().isBadRequest());
 
@@ -152,7 +152,7 @@ public class AdditionalKeysResourceIT {
         // Create the AdditionalKeys, which fails.
 
         restAdditionalKeysMockMvc.perform(post("/api/additional-keys")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(TestUtil.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(additionalKeys)))
             .andExpect(status().isBadRequest());
 
@@ -170,7 +170,7 @@ public class AdditionalKeysResourceIT {
         // Create the AdditionalKeys, which fails.
 
         restAdditionalKeysMockMvc.perform(post("/api/additional-keys")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(TestUtil.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(additionalKeys)))
             .andExpect(status().isBadRequest());
 
@@ -187,7 +187,7 @@ public class AdditionalKeysResourceIT {
         // Get all the additionalKeysList
         restAdditionalKeysMockMvc.perform(get("/api/additional-keys?sort=id,desc"))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(additionalKeys.getId().intValue())))
             .andExpect(jsonPath("$.[*].key").value(hasItem(DEFAULT_KEY)))
             .andExpect(jsonPath("$.[*].value").value(hasItem(DEFAULT_VALUE)));
@@ -202,7 +202,7 @@ public class AdditionalKeysResourceIT {
         // Get the additionalKeys
         restAdditionalKeysMockMvc.perform(get("/api/additional-keys/{id}", additionalKeys.getId()))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(additionalKeys.getId().intValue()))
             .andExpect(jsonPath("$.key").value(DEFAULT_KEY))
             .andExpect(jsonPath("$.value").value(DEFAULT_VALUE));
@@ -233,7 +233,7 @@ public class AdditionalKeysResourceIT {
             .value(UPDATED_VALUE);
 
         restAdditionalKeysMockMvc.perform(put("/api/additional-keys")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(TestUtil.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(updatedAdditionalKeys)))
             .andExpect(status().isOk());
 
@@ -254,7 +254,7 @@ public class AdditionalKeysResourceIT {
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restAdditionalKeysMockMvc.perform(put("/api/additional-keys")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(TestUtil.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(additionalKeys)))
             .andExpect(status().isBadRequest());
 
@@ -273,7 +273,7 @@ public class AdditionalKeysResourceIT {
 
         // Delete the additionalKeys
         restAdditionalKeysMockMvc.perform(delete("/api/additional-keys/{id}", additionalKeys.getId())
-            .accept(TestUtil.APPLICATION_JSON_UTF8))
+            .accept(TestUtil.APPLICATION_JSON))
             .andExpect(status().isNoContent());
 
         // Validate the database contains one less item

@@ -16,8 +16,7 @@ describe('Component Tests', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [AdminNosiaxTestModule],
-        declarations: [VoucherComponent],
-        providers: []
+        declarations: [VoucherComponent]
       })
         .overrideTemplate(VoucherComponent, '')
         .compileComponents();
