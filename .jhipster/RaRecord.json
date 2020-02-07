@@ -2,16 +2,9 @@
     "name": "RaRecord",
     "fields": [
         {
-            "fieldName": "idxAgency",
-            "fieldType": "Integer",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
             "fieldName": "status",
             "fieldType": "Status",
-            "fieldValues": "NONE,DRAFT,TO_SIGN,TO_VALIDATE,VALIDATE,REJECTED,FAILED",
+            "fieldValues": "DRAFT,TO_SIGN,TO_VALIDATE,VALIDATE,REJECTED,FAILED",
             "fieldValidateRules": [
                 "required"
             ]
@@ -102,8 +95,24 @@
             "fieldType": "String"
         },
         {
+            "fieldName": "transactionStatus",
+            "fieldType": "String"
+        },
+        {
             "fieldName": "profilCpm",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "reaso",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "signatureDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "validationDate",
+            "fieldType": "ZonedDateTime"
         }
     ],
     "relationships": [

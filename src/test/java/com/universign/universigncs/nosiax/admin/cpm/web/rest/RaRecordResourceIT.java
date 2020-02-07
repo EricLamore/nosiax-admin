@@ -20,8 +20,13 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Validator;
 
 import javax.persistence.EntityManager;
+import java.time.Instant;
+import java.time.ZonedDateTime;
+import java.time.ZoneOffset;
+import java.time.ZoneId;
 import java.util.List;
 
+import static com.universign.universigncs.nosiax.admin.cpm.web.rest.TestUtil.sameInstant;
 import static com.universign.universigncs.nosiax.admin.cpm.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
@@ -35,11 +40,8 @@ import com.universign.universigncs.nosiax.admin.cpm.domain.enumeration.Status;
 @SpringBootTest(classes = AdminNosiaxApp.class)
 public class RaRecordResourceIT {
 
-    private static final Integer DEFAULT_IDX_AGENCY = 1;
-    private static final Integer UPDATED_IDX_AGENCY = 2;
-
-    private static final Status DEFAULT_STATUS = Status.NONE;
-    private static final Status UPDATED_STATUS = Status.DRAFT;
+    private static final Status DEFAULT_STATUS = Status.DRAFT;
+    private static final Status UPDATED_STATUS = Status.TO_SIGN;
 
     private static final String DEFAULT_ID_USER = "AAAAAAAAAA";
     private static final String UPDATED_ID_USER = "BBBBBBBBBB";
@@ -80,8 +82,20 @@ public class RaRecordResourceIT {
     private static final String DEFAULT_ID_TRANSACTION = "AAAAAAAAAA";
     private static final String UPDATED_ID_TRANSACTION = "BBBBBBBBBB";
 
+    private static final String DEFAULT_TRANSACTION_STATUS = "AAAAAAAAAA";
+    private static final String UPDATED_TRANSACTION_STATUS = "BBBBBBBBBB";
+
     private static final String DEFAULT_PROFIL_CPM = "AAAAAAAAAA";
     private static final String UPDATED_PROFIL_CPM = "BBBBBBBBBB";
+
+    private static final String DEFAULT_REASO = "AAAAAAAAAA";
+    private static final String UPDATED_REASO = "BBBBBBBBBB";
+
+    private static final ZonedDateTime DEFAULT_SIGNATURE_DATE = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
+    private static final ZonedDateTime UPDATED_SIGNATURE_DATE = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
+
+    private static final ZonedDateTime DEFAULT_VALIDATION_DATE = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
+    private static final ZonedDateTime UPDATED_VALIDATION_DATE = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
 
     @Autowired
     private RaRecordRepository raRecordRepository;
@@ -128,7 +142,6 @@ public class RaRecordResourceIT {
      */
     public static RaRecord createEntity(EntityManager em) {
         RaRecord raRecord = new RaRecord()
-            .idxAgency(DEFAULT_IDX_AGENCY)
             .status(DEFAULT_STATUS)
             .idUser(DEFAULT_ID_USER)
             .identifier(DEFAULT_IDENTIFIER)
@@ -143,7 +156,11 @@ public class RaRecordResourceIT {
             .phone(DEFAULT_PHONE)
             .url(DEFAULT_URL)
             .idTransaction(DEFAULT_ID_TRANSACTION)
-            .profilCpm(DEFAULT_PROFIL_CPM);
+            .transactionStatus(DEFAULT_TRANSACTION_STATUS)
+            .profilCpm(DEFAULT_PROFIL_CPM)
+            .reaso(DEFAULT_REASO)
+            .signatureDate(DEFAULT_SIGNATURE_DATE)
+            .validationDate(DEFAULT_VALIDATION_DATE);
         return raRecord;
     }
     /**
@@ -154,7 +171,6 @@ public class RaRecordResourceIT {
      */
     public static RaRecord createUpdatedEntity(EntityManager em) {
         RaRecord raRecord = new RaRecord()
-            .idxAgency(UPDATED_IDX_AGENCY)
             .status(UPDATED_STATUS)
             .idUser(UPDATED_ID_USER)
             .identifier(UPDATED_IDENTIFIER)
@@ -169,7 +185,11 @@ public class RaRecordResourceIT {
             .phone(UPDATED_PHONE)
             .url(UPDATED_URL)
             .idTransaction(UPDATED_ID_TRANSACTION)
-            .profilCpm(UPDATED_PROFIL_CPM);
+            .transactionStatus(UPDATED_TRANSACTION_STATUS)
+            .profilCpm(UPDATED_PROFIL_CPM)
+            .reaso(UPDATED_REASO)
+            .signatureDate(UPDATED_SIGNATURE_DATE)
+            .validationDate(UPDATED_VALIDATION_DATE);
         return raRecord;
     }
 
@@ -185,7 +205,7 @@ public class RaRecordResourceIT {
 
         // Create the RaRecord
         restRaRecordMockMvc.perform(post("/api/ra-records")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(TestUtil.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(raRecord)))
             .andExpect(status().isCreated());
 
@@ -193,7 +213,6 @@ public class RaRecordResourceIT {
         List<RaRecord> raRecordList = raRecordRepository.findAll();
         assertThat(raRecordList).hasSize(databaseSizeBeforeCreate + 1);
         RaRecord testRaRecord = raRecordList.get(raRecordList.size() - 1);
-        assertThat(testRaRecord.getIdxAgency()).isEqualTo(DEFAULT_IDX_AGENCY);
         assertThat(testRaRecord.getStatus()).isEqualTo(DEFAULT_STATUS);
         assertThat(testRaRecord.getIdUser()).isEqualTo(DEFAULT_ID_USER);
         assertThat(testRaRecord.getIdentifier()).isEqualTo(DEFAULT_IDENTIFIER);
@@ -208,7 +227,11 @@ public class RaRecordResourceIT {
         assertThat(testRaRecord.getPhone()).isEqualTo(DEFAULT_PHONE);
         assertThat(testRaRecord.getUrl()).isEqualTo(DEFAULT_URL);
         assertThat(testRaRecord.getIdTransaction()).isEqualTo(DEFAULT_ID_TRANSACTION);
+        assertThat(testRaRecord.getTransactionStatus()).isEqualTo(DEFAULT_TRANSACTION_STATUS);
         assertThat(testRaRecord.getProfilCpm()).isEqualTo(DEFAULT_PROFIL_CPM);
+        assertThat(testRaRecord.getReaso()).isEqualTo(DEFAULT_REASO);
+        assertThat(testRaRecord.getSignatureDate()).isEqualTo(DEFAULT_SIGNATURE_DATE);
+        assertThat(testRaRecord.getValidationDate()).isEqualTo(DEFAULT_VALIDATION_DATE);
     }
 
     @Test
@@ -221,7 +244,7 @@ public class RaRecordResourceIT {
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restRaRecordMockMvc.perform(post("/api/ra-records")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(TestUtil.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(raRecord)))
             .andExpect(status().isBadRequest());
 
@@ -233,24 +256,6 @@ public class RaRecordResourceIT {
 
     @Test
     @Transactional
-    public void checkIdxAgencyIsRequired() throws Exception {
-        int databaseSizeBeforeTest = raRecordRepository.findAll().size();
-        // set the field null
-        raRecord.setIdxAgency(null);
-
-        // Create the RaRecord, which fails.
-
-        restRaRecordMockMvc.perform(post("/api/ra-records")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(raRecord)))
-            .andExpect(status().isBadRequest());
-
-        List<RaRecord> raRecordList = raRecordRepository.findAll();
-        assertThat(raRecordList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     public void checkStatusIsRequired() throws Exception {
         int databaseSizeBeforeTest = raRecordRepository.findAll().size();
         // set the field null
@@ -259,7 +264,7 @@ public class RaRecordResourceIT {
         // Create the RaRecord, which fails.
 
         restRaRecordMockMvc.perform(post("/api/ra-records")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(TestUtil.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(raRecord)))
             .andExpect(status().isBadRequest());
 
@@ -277,7 +282,7 @@ public class RaRecordResourceIT {
         // Create the RaRecord, which fails.
 
         restRaRecordMockMvc.perform(post("/api/ra-records")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(TestUtil.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(raRecord)))
             .andExpect(status().isBadRequest());
 
@@ -295,7 +300,7 @@ public class RaRecordResourceIT {
         // Create the RaRecord, which fails.
 
         restRaRecordMockMvc.perform(post("/api/ra-records")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(TestUtil.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(raRecord)))
             .andExpect(status().isBadRequest());
 
@@ -313,7 +318,7 @@ public class RaRecordResourceIT {
         // Create the RaRecord, which fails.
 
         restRaRecordMockMvc.perform(post("/api/ra-records")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(TestUtil.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(raRecord)))
             .andExpect(status().isBadRequest());
 
@@ -331,7 +336,7 @@ public class RaRecordResourceIT {
         // Create the RaRecord, which fails.
 
         restRaRecordMockMvc.perform(post("/api/ra-records")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(TestUtil.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(raRecord)))
             .andExpect(status().isBadRequest());
 
@@ -349,7 +354,7 @@ public class RaRecordResourceIT {
         // Create the RaRecord, which fails.
 
         restRaRecordMockMvc.perform(post("/api/ra-records")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(TestUtil.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(raRecord)))
             .andExpect(status().isBadRequest());
 
@@ -367,7 +372,7 @@ public class RaRecordResourceIT {
         // Create the RaRecord, which fails.
 
         restRaRecordMockMvc.perform(post("/api/ra-records")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(TestUtil.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(raRecord)))
             .andExpect(status().isBadRequest());
 
@@ -385,7 +390,7 @@ public class RaRecordResourceIT {
         // Create the RaRecord, which fails.
 
         restRaRecordMockMvc.perform(post("/api/ra-records")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(TestUtil.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(raRecord)))
             .andExpect(status().isBadRequest());
 
@@ -403,7 +408,7 @@ public class RaRecordResourceIT {
         // Create the RaRecord, which fails.
 
         restRaRecordMockMvc.perform(post("/api/ra-records")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(TestUtil.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(raRecord)))
             .andExpect(status().isBadRequest());
 
@@ -421,7 +426,7 @@ public class RaRecordResourceIT {
         // Create the RaRecord, which fails.
 
         restRaRecordMockMvc.perform(post("/api/ra-records")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(TestUtil.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(raRecord)))
             .andExpect(status().isBadRequest());
 
@@ -439,7 +444,7 @@ public class RaRecordResourceIT {
         // Create the RaRecord, which fails.
 
         restRaRecordMockMvc.perform(post("/api/ra-records")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(TestUtil.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(raRecord)))
             .andExpect(status().isBadRequest());
 
@@ -457,7 +462,7 @@ public class RaRecordResourceIT {
         // Create the RaRecord, which fails.
 
         restRaRecordMockMvc.perform(post("/api/ra-records")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(TestUtil.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(raRecord)))
             .andExpect(status().isBadRequest());
 
@@ -474,9 +479,8 @@ public class RaRecordResourceIT {
         // Get all the raRecordList
         restRaRecordMockMvc.perform(get("/api/ra-records?sort=id,desc"))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(raRecord.getId().intValue())))
-            .andExpect(jsonPath("$.[*].idxAgency").value(hasItem(DEFAULT_IDX_AGENCY)))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
             .andExpect(jsonPath("$.[*].idUser").value(hasItem(DEFAULT_ID_USER)))
             .andExpect(jsonPath("$.[*].identifier").value(hasItem(DEFAULT_IDENTIFIER)))
@@ -491,7 +495,11 @@ public class RaRecordResourceIT {
             .andExpect(jsonPath("$.[*].phone").value(hasItem(DEFAULT_PHONE)))
             .andExpect(jsonPath("$.[*].url").value(hasItem(DEFAULT_URL)))
             .andExpect(jsonPath("$.[*].idTransaction").value(hasItem(DEFAULT_ID_TRANSACTION)))
-            .andExpect(jsonPath("$.[*].profilCpm").value(hasItem(DEFAULT_PROFIL_CPM)));
+            .andExpect(jsonPath("$.[*].transactionStatus").value(hasItem(DEFAULT_TRANSACTION_STATUS)))
+            .andExpect(jsonPath("$.[*].profilCpm").value(hasItem(DEFAULT_PROFIL_CPM)))
+            .andExpect(jsonPath("$.[*].reaso").value(hasItem(DEFAULT_REASO)))
+            .andExpect(jsonPath("$.[*].signatureDate").value(hasItem(sameInstant(DEFAULT_SIGNATURE_DATE))))
+            .andExpect(jsonPath("$.[*].validationDate").value(hasItem(sameInstant(DEFAULT_VALIDATION_DATE))));
     }
     
     @Test
@@ -503,9 +511,8 @@ public class RaRecordResourceIT {
         // Get the raRecord
         restRaRecordMockMvc.perform(get("/api/ra-records/{id}", raRecord.getId()))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(raRecord.getId().intValue()))
-            .andExpect(jsonPath("$.idxAgency").value(DEFAULT_IDX_AGENCY))
             .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()))
             .andExpect(jsonPath("$.idUser").value(DEFAULT_ID_USER))
             .andExpect(jsonPath("$.identifier").value(DEFAULT_IDENTIFIER))
@@ -520,7 +527,11 @@ public class RaRecordResourceIT {
             .andExpect(jsonPath("$.phone").value(DEFAULT_PHONE))
             .andExpect(jsonPath("$.url").value(DEFAULT_URL))
             .andExpect(jsonPath("$.idTransaction").value(DEFAULT_ID_TRANSACTION))
-            .andExpect(jsonPath("$.profilCpm").value(DEFAULT_PROFIL_CPM));
+            .andExpect(jsonPath("$.transactionStatus").value(DEFAULT_TRANSACTION_STATUS))
+            .andExpect(jsonPath("$.profilCpm").value(DEFAULT_PROFIL_CPM))
+            .andExpect(jsonPath("$.reaso").value(DEFAULT_REASO))
+            .andExpect(jsonPath("$.signatureDate").value(sameInstant(DEFAULT_SIGNATURE_DATE)))
+            .andExpect(jsonPath("$.validationDate").value(sameInstant(DEFAULT_VALIDATION_DATE)));
     }
 
     @Test
@@ -544,7 +555,6 @@ public class RaRecordResourceIT {
         // Disconnect from session so that the updates on updatedRaRecord are not directly saved in db
         em.detach(updatedRaRecord);
         updatedRaRecord
-            .idxAgency(UPDATED_IDX_AGENCY)
             .status(UPDATED_STATUS)
             .idUser(UPDATED_ID_USER)
             .identifier(UPDATED_IDENTIFIER)
@@ -559,10 +569,14 @@ public class RaRecordResourceIT {
             .phone(UPDATED_PHONE)
             .url(UPDATED_URL)
             .idTransaction(UPDATED_ID_TRANSACTION)
-            .profilCpm(UPDATED_PROFIL_CPM);
+            .transactionStatus(UPDATED_TRANSACTION_STATUS)
+            .profilCpm(UPDATED_PROFIL_CPM)
+            .reaso(UPDATED_REASO)
+            .signatureDate(UPDATED_SIGNATURE_DATE)
+            .validationDate(UPDATED_VALIDATION_DATE);
 
         restRaRecordMockMvc.perform(put("/api/ra-records")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(TestUtil.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(updatedRaRecord)))
             .andExpect(status().isOk());
 
@@ -570,7 +584,6 @@ public class RaRecordResourceIT {
         List<RaRecord> raRecordList = raRecordRepository.findAll();
         assertThat(raRecordList).hasSize(databaseSizeBeforeUpdate);
         RaRecord testRaRecord = raRecordList.get(raRecordList.size() - 1);
-        assertThat(testRaRecord.getIdxAgency()).isEqualTo(UPDATED_IDX_AGENCY);
         assertThat(testRaRecord.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testRaRecord.getIdUser()).isEqualTo(UPDATED_ID_USER);
         assertThat(testRaRecord.getIdentifier()).isEqualTo(UPDATED_IDENTIFIER);
@@ -585,7 +598,11 @@ public class RaRecordResourceIT {
         assertThat(testRaRecord.getPhone()).isEqualTo(UPDATED_PHONE);
         assertThat(testRaRecord.getUrl()).isEqualTo(UPDATED_URL);
         assertThat(testRaRecord.getIdTransaction()).isEqualTo(UPDATED_ID_TRANSACTION);
+        assertThat(testRaRecord.getTransactionStatus()).isEqualTo(UPDATED_TRANSACTION_STATUS);
         assertThat(testRaRecord.getProfilCpm()).isEqualTo(UPDATED_PROFIL_CPM);
+        assertThat(testRaRecord.getReaso()).isEqualTo(UPDATED_REASO);
+        assertThat(testRaRecord.getSignatureDate()).isEqualTo(UPDATED_SIGNATURE_DATE);
+        assertThat(testRaRecord.getValidationDate()).isEqualTo(UPDATED_VALIDATION_DATE);
     }
 
     @Test
@@ -597,7 +614,7 @@ public class RaRecordResourceIT {
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restRaRecordMockMvc.perform(put("/api/ra-records")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(TestUtil.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(raRecord)))
             .andExpect(status().isBadRequest());
 
@@ -616,7 +633,7 @@ public class RaRecordResourceIT {
 
         // Delete the raRecord
         restRaRecordMockMvc.perform(delete("/api/ra-records/{id}", raRecord.getId())
-            .accept(TestUtil.APPLICATION_JSON_UTF8))
+            .accept(TestUtil.APPLICATION_JSON))
             .andExpect(status().isNoContent());
 
         // Validate the database contains one less item

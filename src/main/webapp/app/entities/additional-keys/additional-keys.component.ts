@@ -23,9 +23,7 @@ export class AdditionalKeysComponent implements OnInit, OnDestroy {
   ) {}
 
   loadAll(): void {
-    this.additionalKeysService.query().subscribe((res: HttpResponse<IAdditionalKeys[]>) => {
-      this.additionalKeys = res.body ? res.body : [];
-    });
+    this.additionalKeysService.query().subscribe((res: HttpResponse<IAdditionalKeys[]>) => (this.additionalKeys = res.body || []));
   }
 
   ngOnInit(): void {

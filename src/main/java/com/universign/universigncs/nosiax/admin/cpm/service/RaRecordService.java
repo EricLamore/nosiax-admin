@@ -28,7 +28,6 @@ public interface RaRecordService {
      */
     Page<RaRecord> findAll(Pageable pageable);
 
-
     /**
      * Get the "id" raRecord.
      *

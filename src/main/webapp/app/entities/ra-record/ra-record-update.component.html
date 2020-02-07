@@ -2,32 +2,18 @@
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
             <h2 id="jhi-ra-record-heading">Create or edit a Ra Record</h2>
+
             <div>
                 <jhi-alert-error></jhi-alert-error>
+
                 <div class="form-group" [hidden]="!editForm.get('id')!.value">
                     <label for="id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
-                        readonly />
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_idxAgency">Idx Agency</label>
-                    <input type="number" class="form-control" name="idxAgency" id="field_idxAgency"
-                           formControlName="idxAgency"/>
-                    <div *ngIf="editForm.get('idxAgency')!.invalid && (editForm.get('idxAgency')!.dirty || editForm.get('idxAgency')!.touched)">
-                        <small class="form-text text-danger"
-                               *ngIf="editForm.get('idxAgency')?.errors?.required">
-                        This field is required.
-                        </small>
-                        <small class="form-text text-danger"
-                            [hidden]="!editForm.get('idxAgency')?.errors?.number">
-                            This field should be a number.
-                        </small>
-                    </div>
-                </div>
+
                 <div class="form-group">
                     <label class="form-control-label" for="field_status">Status</label>
                     <select class="form-control" name="status" formControlName="status" id="field_status">
-                        <option value="NONE">NONE</option>
                         <option value="DRAFT">DRAFT</option>
                         <option value="TO_SIGN">TO_SIGN</option>
                         <option value="TO_VALIDATE">TO_VALIDATE</option>
@@ -42,6 +28,7 @@
                         </small>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label class="form-control-label" for="field_idUser">Id User</label>
                     <input type="text" class="form-control" name="idUser" id="field_idUser"
@@ -53,6 +40,7 @@
                         </small>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label class="form-control-label" for="field_identifier">Identifier</label>
                     <input type="text" class="form-control" name="identifier" id="field_identifier"
@@ -64,6 +52,7 @@
                         </small>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label class="form-control-label" for="field_certO">Cert O</label>
                     <input type="text" class="form-control" name="certO" id="field_certO"
@@ -75,6 +64,7 @@
                         </small>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label class="form-control-label" for="field_commonName">Common Name</label>
                     <input type="text" class="form-control" name="commonName" id="field_commonName"
@@ -86,6 +76,7 @@
                         </small>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label class="form-control-label" for="field_zipCode">Zip Code</label>
                     <input type="text" class="form-control" name="zipCode" id="field_zipCode"
@@ -97,6 +88,7 @@
                         </small>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label class="form-control-label" for="field_locality">Locality</label>
                     <input type="text" class="form-control" name="locality" id="field_locality"
@@ -108,6 +100,7 @@
                         </small>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label class="form-control-label" for="field_country">Country</label>
                     <input type="text" class="form-control" name="country" id="field_country"
@@ -119,6 +112,7 @@
                         </small>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label class="form-control-label" for="field_lastname">Lastname</label>
                     <input type="text" class="form-control" name="lastname" id="field_lastname"
@@ -130,6 +124,7 @@
                         </small>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label class="form-control-label" for="field_firstname">Firstname</label>
                     <input type="text" class="form-control" name="firstname" id="field_firstname"
@@ -141,6 +136,7 @@
                         </small>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label class="form-control-label" for="field_email">Email</label>
                     <input type="text" class="form-control" name="email" id="field_email"
@@ -152,6 +148,7 @@
                         </small>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label class="form-control-label" for="field_phone">Phone</label>
                     <input type="text" class="form-control" name="phone" id="field_phone"
@@ -163,29 +160,59 @@
                         </small>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label class="form-control-label" for="field_url">Url</label>
                     <input type="text" class="form-control" name="url" id="field_url"
                            formControlName="url"/>
                 </div>
+
                 <div class="form-group">
                     <label class="form-control-label" for="field_idTransaction">Id Transaction</label>
                     <input type="text" class="form-control" name="idTransaction" id="field_idTransaction"
                            formControlName="idTransaction"/>
                 </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_transactionStatus">Transaction Status</label>
+                    <input type="text" class="form-control" name="transactionStatus" id="field_transactionStatus"
+                           formControlName="transactionStatus"/>
+                </div>
+
                 <div class="form-group">
                     <label class="form-control-label" for="field_profilCpm">Profil Cpm</label>
                     <input type="text" class="form-control" name="profilCpm" id="field_profilCpm"
                            formControlName="profilCpm"/>
                 </div>
 
+                <div class="form-group">
+                    <label class="form-control-label" for="field_reaso">Reaso</label>
+                    <input type="text" class="form-control" name="reaso" id="field_reaso"
+                           formControlName="reaso"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_signatureDate">Signature Date</label>
+                    <div class="d-flex">
+                        <input id="field_signatureDate" type="datetime-local" class="form-control" name="signatureDate" formControlName="signatureDate" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_validationDate">Validation Date</label>
+                    <div class="d-flex">
+                        <input id="field_validationDate" type="datetime-local" class="form-control" name="validationDate" formControlName="validationDate" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
             </div>
+
             <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
-                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
                 </button>
+
                 <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
-                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
                 </button>
             </div>
         </form>

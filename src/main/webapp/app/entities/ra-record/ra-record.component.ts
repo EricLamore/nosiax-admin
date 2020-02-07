@@ -34,7 +34,8 @@ export class RaRecordComponent implements OnInit, OnDestroy {
   ) {}
 
   loadPage(page?: number): void {
-    const pageToLoad: number = page ? page : this.page;
+    const pageToLoad: number = page || this.page;
+
     this.raRecordService
       .query({
         page: pageToLoad - 1,
@@ -96,7 +97,7 @@ export class RaRecordComponent implements OnInit, OnDestroy {
         sort: this.predicate + ',' + (this.ascending ? 'asc' : 'desc')
       }
     });
-    this.raRecords = data ? data : [];
+    this.raRecords = data || [];
   }
 
   protected onError(): void {
