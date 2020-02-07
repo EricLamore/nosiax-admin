@@ -4,6 +4,8 @@ import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import * as moment from 'moment';
+import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 
 import { IRaRecord, RaRecord } from 'app/shared/model/ra-record.model';
 import { RaRecordService } from './ra-record.service';
@@ -17,7 +19,6 @@ export class RaRecordUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
-    idxAgency: [null, [Validators.required]],
     status: [null, [Validators.required]],
     idUser: [null, [Validators.required]],
     identifier: [null, [Validators.required]],
@@ -32,13 +33,23 @@ export class RaRecordUpdateComponent implements OnInit {
     phone: [null, [Validators.required]],
     url: [],
     idTransaction: [],
-    profilCpm: []
+    transactionStatus: [],
+    profilCpm: [],
+    reaso: [],
+    signatureDate: [],
+    validationDate: []
   });
 
   constructor(protected raRecordService: RaRecordService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ raRecord }) => {
+      if (!raRecord.id) {
+        const today = moment().startOf('day');
+        raRecord.signatureDate = today;
+        raRecord.validationDate = today;
+      }
+
       this.updateForm(raRecord);
     });
   }
@@ -46,7 +57,6 @@ export class RaRecordUpdateComponent implements OnInit {
   updateForm(raRecord: IRaRecord): void {
     this.editForm.patchValue({
       id: raRecord.id,
-      idxAgency: raRecord.idxAgency,
       status: raRecord.status,
       idUser: raRecord.idUser,
       identifier: raRecord.identifier,
@@ -61,7 +71,11 @@ export class RaRecordUpdateComponent implements OnInit {
       phone: raRecord.phone,
       url: raRecord.url,
       idTransaction: raRecord.idTransaction,
-      profilCpm: raRecord.profilCpm
+      transactionStatus: raRecord.transactionStatus,
+      profilCpm: raRecord.profilCpm,
+      reaso: raRecord.reaso,
+      signatureDate: raRecord.signatureDate ? raRecord.signatureDate.format(DATE_TIME_FORMAT) : null,
+      validationDate: raRecord.validationDate ? raRecord.validationDate.format(DATE_TIME_FORMAT) : null
     });
   }
 
@@ -83,7 +97,6 @@ export class RaRecordUpdateComponent implements OnInit {
     return {
       ...new RaRecord(),
       id: this.editForm.get(['id'])!.value,
-      idxAgency: this.editForm.get(['idxAgency'])!.value,
       status: this.editForm.get(['status'])!.value,
       idUser: this.editForm.get(['idUser'])!.value,
       identifier: this.editForm.get(['identifier'])!.value,
@@ -98,7 +111,15 @@ export class RaRecordUpdateComponent implements OnInit {
       phone: this.editForm.get(['phone'])!.value,
       url: this.editForm.get(['url'])!.value,
       idTransaction: this.editForm.get(['idTransaction'])!.value,
-      profilCpm: this.editForm.get(['profilCpm'])!.value
+      transactionStatus: this.editForm.get(['transactionStatus'])!.value,
+      profilCpm: this.editForm.get(['profilCpm'])!.value,
+      reaso: this.editForm.get(['reaso'])!.value,
+      signatureDate: this.editForm.get(['signatureDate'])!.value
+        ? moment(this.editForm.get(['signatureDate'])!.value, DATE_TIME_FORMAT)
+        : undefined,
+      validationDate: this.editForm.get(['validationDate'])!.value
+        ? moment(this.editForm.get(['validationDate'])!.value, DATE_TIME_FORMAT)
+        : undefined
     };
   }
 

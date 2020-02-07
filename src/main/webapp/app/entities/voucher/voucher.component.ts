@@ -19,9 +19,7 @@ export class VoucherComponent implements OnInit, OnDestroy {
   constructor(protected voucherService: VoucherService, protected eventManager: JhiEventManager, protected modalService: NgbModal) {}
 
   loadAll(): void {
-    this.voucherService.query().subscribe((res: HttpResponse<IVoucher[]>) => {
-      this.vouchers = res.body ? res.body : [];
-    });
+    this.voucherService.query().subscribe((res: HttpResponse<IVoucher[]>) => (this.vouchers = res.body || []));
   }
 
   ngOnInit(): void {
