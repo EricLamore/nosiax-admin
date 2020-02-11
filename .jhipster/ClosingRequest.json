@@ -1,0 +1,94 @@
+{
+    "name": "ClosingRequest",
+    "fields": [
+        {
+            "fieldName": "idxAgency",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "closingStatus",
+            "fieldType": "ClosingStatus",
+            "fieldValues": "CREATED,SIGNED,CANCELED,DONE"
+        },
+        {
+            "fieldName": "closingDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "revokeCertificate",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "revokeCertificateDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "linkEsign",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "linkEsignDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "anonymized",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "anonymizedDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "createBill",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "createBillDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "sendBill",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "sendBillDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "terminate",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "terminateDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "idTransactionClosing",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "urlTransactionClosing",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "agency",
+            "otherEntityRelationshipName": "closingRequest",
+            "relationshipName": "agency",
+            "otherEntityField": "id",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20200211121400",
+    "entityTableName": "closing_request",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}
