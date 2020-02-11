@@ -1,0 +1,109 @@
+<div>
+    <h2 id="page-heading">
+        <span>Closing Requests</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-closing-request" [routerLink]="['/closing-request/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+            Create a new Closing Request
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="closingRequests?.length === 0">
+        <span>No closingRequests found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="closingRequests?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="idxAgency"><span>Idx Agency</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="closingStatus"><span>Closing Status</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="closingDate"><span>Closing Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="revokeCertificate"><span>Revoke Certificate</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="revokeCertificateDate"><span>Revoke Certificate Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="linkEsign"><span>Link Esign</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="linkEsignDate"><span>Link Esign Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="anonymized"><span>Anonymized</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="anonymizedDate"><span>Anonymized Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="createBill"><span>Create Bill</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="createBillDate"><span>Create Bill Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="sendBill"><span>Send Bill</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="sendBillDate"><span>Send Bill Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="terminate"><span>Terminate</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="terminateDate"><span>Terminate Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="idTransactionClosing"><span>Id Transaction Closing</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="urlTransactionClosing"><span>Url Transaction Closing</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="agency.id"><span>Agency</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let closingRequest of closingRequests ;trackBy: trackId">
+                    <td><a [routerLink]="['/closing-request', closingRequest.id, 'view']">{{ closingRequest.id }}</a></td>
+                    <td>{{ closingRequest.idxAgency }}</td>
+                    <td>{{ closingRequest.closingStatus }}</td>
+                    <td>{{ closingRequest.closingDate | date:'medium' }}</td>
+                    <td>{{ closingRequest.revokeCertificate }}</td>
+                    <td>{{ closingRequest.revokeCertificateDate | date:'medium' }}</td>
+                    <td>{{ closingRequest.linkEsign }}</td>
+                    <td>{{ closingRequest.linkEsignDate | date:'medium' }}</td>
+                    <td>{{ closingRequest.anonymized }}</td>
+                    <td>{{ closingRequest.anonymizedDate | date:'medium' }}</td>
+                    <td>{{ closingRequest.createBill }}</td>
+                    <td>{{ closingRequest.createBillDate | date:'medium' }}</td>
+                    <td>{{ closingRequest.sendBill }}</td>
+                    <td>{{ closingRequest.sendBillDate | date:'medium' }}</td>
+                    <td>{{ closingRequest.terminate }}</td>
+                    <td>{{ closingRequest.terminateDate | date:'medium' }}</td>
+                    <td>{{ closingRequest.idTransactionClosing }}</td>
+                    <td>{{ closingRequest.urlTransactionClosing }}</td>
+                    <td>
+                        <div *ngIf="closingRequest.agency">
+                            <a [routerLink]="['/agency', closingRequest.agency?.id, 'view']" >{{ closingRequest.agency?.id }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/closing-request', closingRequest.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/closing-request', closingRequest.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(closingRequest)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="closingRequests?.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

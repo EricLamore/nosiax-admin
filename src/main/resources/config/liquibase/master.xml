@@ -17,8 +17,11 @@
     <include file="config/liquibase/changelog/20200108095034_added_entity_RaRecord.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200108095035_added_entity_Voucher.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200108095036_added_entity_AdditionalKeys.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200211121700_added_entity_ClosingRequest.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200211121800_added_entity_Agency.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20200108095035_added_entity_constraints_Voucher.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200108095036_added_entity_constraints_AdditionalKeys.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200211121700_added_entity_constraints_ClosingRequest.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>
