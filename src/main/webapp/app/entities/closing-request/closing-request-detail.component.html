@@ -1,0 +1,92 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="closingRequest">
+            <h2><span>Closing Request</span> {{ closingRequest.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Idx Agency</span></dt>
+                <dd>
+                    <span>{{ closingRequest.idxAgency }}</span>
+                </dd>
+                <dt><span>Closing Status</span></dt>
+                <dd>
+                    <span>{{ closingRequest.closingStatus }}</span>
+                </dd>
+                <dt><span>Closing Date</span></dt>
+                <dd>
+                    <span>{{ closingRequest.closingDate }}</span>
+                </dd>
+                <dt><span>Revoke Certificate</span></dt>
+                <dd>
+                    <span>{{ closingRequest.revokeCertificate }}</span>
+                </dd>
+                <dt><span>Revoke Certificate Date</span></dt>
+                <dd>
+                    <span>{{ closingRequest.revokeCertificateDate }}</span>
+                </dd>
+                <dt><span>Link Esign</span></dt>
+                <dd>
+                    <span>{{ closingRequest.linkEsign }}</span>
+                </dd>
+                <dt><span>Link Esign Date</span></dt>
+                <dd>
+                    <span>{{ closingRequest.linkEsignDate }}</span>
+                </dd>
+                <dt><span>Anonymized</span></dt>
+                <dd>
+                    <span>{{ closingRequest.anonymized }}</span>
+                </dd>
+                <dt><span>Anonymized Date</span></dt>
+                <dd>
+                    <span>{{ closingRequest.anonymizedDate }}</span>
+                </dd>
+                <dt><span>Create Bill</span></dt>
+                <dd>
+                    <span>{{ closingRequest.createBill }}</span>
+                </dd>
+                <dt><span>Create Bill Date</span></dt>
+                <dd>
+                    <span>{{ closingRequest.createBillDate }}</span>
+                </dd>
+                <dt><span>Send Bill</span></dt>
+                <dd>
+                    <span>{{ closingRequest.sendBill }}</span>
+                </dd>
+                <dt><span>Send Bill Date</span></dt>
+                <dd>
+                    <span>{{ closingRequest.sendBillDate }}</span>
+                </dd>
+                <dt><span>Terminate</span></dt>
+                <dd>
+                    <span>{{ closingRequest.terminate }}</span>
+                </dd>
+                <dt><span>Terminate Date</span></dt>
+                <dd>
+                    <span>{{ closingRequest.terminateDate }}</span>
+                </dd>
+                <dt><span>Idx Agency</span></dt>
+                <dd>
+                    <div *ngIf="closingRequest.idxAgency">
+                        <a [routerLink]="['/agency', closingRequest.idxAgency?.id, 'view']">{{ closingRequest.idxAgency?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/closing-request', closingRequest.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

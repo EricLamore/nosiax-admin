@@ -1,0 +1,135 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-closing-request-heading">Create or edit a Closing Request</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_idxAgency">Idx Agency</label>
+                    <input type="number" class="form-control" name="idxAgency" id="field_idxAgency"
+                           formControlName="idxAgency"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_closingStatus">Closing Status</label>
+                    <select class="form-control" name="closingStatus" formControlName="closingStatus" id="field_closingStatus">
+                        <option value="CREATED">CREATED</option>
+                        <option value="SIGNED">SIGNED</option>
+                        <option value="CANCELED">CANCELED</option>
+                        <option value="DONE">DONE</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_closingDate">Closing Date</label>
+                    <div class="d-flex">
+                        <input id="field_closingDate" type="datetime-local" class="form-control" name="closingDate" formControlName="closingDate" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_revokeCertificate">Revoke Certificate</label>
+                    <input type="checkbox" class="form-control" name="revokeCertificate" id="field_revokeCertificate"
+                           formControlName="revokeCertificate"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_revokeCertificateDate">Revoke Certificate Date</label>
+                    <div class="d-flex">
+                        <input id="field_revokeCertificateDate" type="datetime-local" class="form-control" name="revokeCertificateDate" formControlName="revokeCertificateDate" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_linkEsign">Link Esign</label>
+                    <input type="checkbox" class="form-control" name="linkEsign" id="field_linkEsign"
+                           formControlName="linkEsign"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_linkEsignDate">Link Esign Date</label>
+                    <div class="d-flex">
+                        <input id="field_linkEsignDate" type="datetime-local" class="form-control" name="linkEsignDate" formControlName="linkEsignDate" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_anonymized">Anonymized</label>
+                    <input type="checkbox" class="form-control" name="anonymized" id="field_anonymized"
+                           formControlName="anonymized"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_anonymizedDate">Anonymized Date</label>
+                    <div class="d-flex">
+                        <input id="field_anonymizedDate" type="datetime-local" class="form-control" name="anonymizedDate" formControlName="anonymizedDate" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_createBill">Create Bill</label>
+                    <input type="checkbox" class="form-control" name="createBill" id="field_createBill"
+                           formControlName="createBill"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_createBillDate">Create Bill Date</label>
+                    <div class="d-flex">
+                        <input id="field_createBillDate" type="datetime-local" class="form-control" name="createBillDate" formControlName="createBillDate" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_sendBill">Send Bill</label>
+                    <input type="checkbox" class="form-control" name="sendBill" id="field_sendBill"
+                           formControlName="sendBill"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_sendBillDate">Send Bill Date</label>
+                    <div class="d-flex">
+                        <input id="field_sendBillDate" type="datetime-local" class="form-control" name="sendBillDate" formControlName="sendBillDate" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_terminate">Terminate</label>
+                    <input type="checkbox" class="form-control" name="terminate" id="field_terminate"
+                           formControlName="terminate"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_terminateDate">Terminate Date</label>
+                    <div class="d-flex">
+                        <input id="field_terminateDate" type="datetime-local" class="form-control" name="terminateDate" formControlName="terminateDate" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_idxAgency">Idx Agency</label>
+                    <select class="form-control" id="field_idxAgency" name="idxAgency" formControlName="idxAgency">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="agencyOption.id === editForm.get('idxAgency')!.value?.id ? editForm.get('idxAgency')!.value : agencyOption" *ngFor="let agencyOption of idxagencies; trackBy: trackById">{{ agencyOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

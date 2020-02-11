@@ -1,0 +1,20 @@
+{
+    "name": "Agency",
+    "fields": [
+        {
+            "fieldName": "idxAgency",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20200211112600",
+    "entityTableName": "agency",
+    "dto": "no",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}
