@@ -1,0 +1,37 @@
+entity ClosingRequest {
+	idxAgency Integer
+	closingStatus ClosingStatus
+    closingDate Instant
+    revokeCertificate Boolean
+    revokeCertificateDate Instant
+    linkEsign Boolean
+    linkEsignDate Instant
+    anonymized Boolean
+    anonymizedDate Instant
+    createBill Boolean
+    createBillDate Instant
+    sendBill Boolean 
+    sendBillDate Instant
+    terminate Boolean
+    terminateDate Instant
+}
+
+enum ClosingStatus {
+    CREATED, SIGNED, CANCELED, DONE
+}
+
+relationship OneToOne {
+	ClosingRequest{idxAgency} to Agency
+}
+
+// Set pagination options
+paginate ClosingRequest with pagination
+
+// Use Data Transfert Objects (DTO)
+// dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl except ClosingRequest
+
+// Set an angular suffix
+// angularSuffix * with mySuffix
