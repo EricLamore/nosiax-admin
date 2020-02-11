@@ -1,0 +1,86 @@
+{
+    "name": "ClosingRequest",
+    "fields": [
+        {
+            "fieldName": "idxAgency",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "closingStatus",
+            "fieldType": "ClosingStatus",
+            "fieldValues": "CREATED,SIGNED,CANCELED,DONE"
+        },
+        {
+            "fieldName": "closingDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "revokeCertificate",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "revokeCertificateDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "linkEsign",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "linkEsignDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "anonymized",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "anonymizedDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "createBill",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "createBillDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "sendBill",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "sendBillDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "terminate",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "terminateDate",
+            "fieldType": "Instant"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "agency",
+            "otherEntityRelationshipName": "closingRequest",
+            "relationshipName": "agency",
+            "otherEntityField": "id",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20200211113000",
+    "entityTableName": "closing_request",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}
