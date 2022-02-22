@@ -1,0 +1,214 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-ra-record-heading" data-cy="RaRecordCreateUpdateHeading">Create or edit a Ra Record</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_status">Status</label>
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null"></option>
+            <option *ngFor="let status of statusValues" [value]="status">status</option>
+          </select>
+          <div *ngIf="editForm.get('status')!.invalid && (editForm.get('status')!.dirty || editForm.get('status')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('status')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_idUser">Id User</label>
+          <input type="text" class="form-control" name="idUser" id="field_idUser" data-cy="idUser" formControlName="idUser" />
+          <div *ngIf="editForm.get('idUser')!.invalid && (editForm.get('idUser')!.dirty || editForm.get('idUser')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('idUser')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_identifier">Identifier</label>
+          <input
+            type="text"
+            class="form-control"
+            name="identifier"
+            id="field_identifier"
+            data-cy="identifier"
+            formControlName="identifier"
+          />
+          <div *ngIf="editForm.get('identifier')!.invalid && (editForm.get('identifier')!.dirty || editForm.get('identifier')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('identifier')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_certO">Cert O</label>
+          <input type="text" class="form-control" name="certO" id="field_certO" data-cy="certO" formControlName="certO" />
+          <div *ngIf="editForm.get('certO')!.invalid && (editForm.get('certO')!.dirty || editForm.get('certO')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('certO')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_commonName">Common Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="commonName"
+            id="field_commonName"
+            data-cy="commonName"
+            formControlName="commonName"
+          />
+          <div *ngIf="editForm.get('commonName')!.invalid && (editForm.get('commonName')!.dirty || editForm.get('commonName')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('commonName')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_zipCode">Zip Code</label>
+          <input type="text" class="form-control" name="zipCode" id="field_zipCode" data-cy="zipCode" formControlName="zipCode" />
+          <div *ngIf="editForm.get('zipCode')!.invalid && (editForm.get('zipCode')!.dirty || editForm.get('zipCode')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('zipCode')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_locality">Locality</label>
+          <input type="text" class="form-control" name="locality" id="field_locality" data-cy="locality" formControlName="locality" />
+          <div *ngIf="editForm.get('locality')!.invalid && (editForm.get('locality')!.dirty || editForm.get('locality')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('locality')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_country">Country</label>
+          <input type="text" class="form-control" name="country" id="field_country" data-cy="country" formControlName="country" />
+          <div *ngIf="editForm.get('country')!.invalid && (editForm.get('country')!.dirty || editForm.get('country')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('country')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_lastname">Lastname</label>
+          <input type="text" class="form-control" name="lastname" id="field_lastname" data-cy="lastname" formControlName="lastname" />
+          <div *ngIf="editForm.get('lastname')!.invalid && (editForm.get('lastname')!.dirty || editForm.get('lastname')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('lastname')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_firstname">Firstname</label>
+          <input type="text" class="form-control" name="firstname" id="field_firstname" data-cy="firstname" formControlName="firstname" />
+          <div *ngIf="editForm.get('firstname')!.invalid && (editForm.get('firstname')!.dirty || editForm.get('firstname')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('firstname')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_email">Email</label>
+          <input type="text" class="form-control" name="email" id="field_email" data-cy="email" formControlName="email" />
+          <div *ngIf="editForm.get('email')!.invalid && (editForm.get('email')!.dirty || editForm.get('email')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('email')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_phone">Phone</label>
+          <input type="text" class="form-control" name="phone" id="field_phone" data-cy="phone" formControlName="phone" />
+          <div *ngIf="editForm.get('phone')!.invalid && (editForm.get('phone')!.dirty || editForm.get('phone')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('phone')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_url">Url</label>
+          <input type="text" class="form-control" name="url" id="field_url" data-cy="url" formControlName="url" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_idTransaction">Id Transaction</label>
+          <input
+            type="text"
+            class="form-control"
+            name="idTransaction"
+            id="field_idTransaction"
+            data-cy="idTransaction"
+            formControlName="idTransaction"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_transactionStatus">Transaction Status</label>
+          <input
+            type="text"
+            class="form-control"
+            name="transactionStatus"
+            id="field_transactionStatus"
+            data-cy="transactionStatus"
+            formControlName="transactionStatus"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_profilCpm">Profil Cpm</label>
+          <input type="text" class="form-control" name="profilCpm" id="field_profilCpm" data-cy="profilCpm" formControlName="profilCpm" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_reaso">Reaso</label>
+          <input type="text" class="form-control" name="reaso" id="field_reaso" data-cy="reaso" formControlName="reaso" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_signatureDate">Signature Date</label>
+          <div class="d-flex">
+            <input
+              id="field_signatureDate"
+              data-cy="signatureDate"
+              type="datetime-local"
+              class="form-control"
+              name="signatureDate"
+              formControlName="signatureDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_validationDate">Validation Date</label>
+          <div class="d-flex">
+            <input
+              id="field_validationDate"
+              data-cy="validationDate"
+              type="datetime-local"
+              class="form-control"
+              name="validationDate"
+              formControlName="validationDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

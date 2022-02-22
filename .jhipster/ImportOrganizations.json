@@ -1,0 +1,45 @@
+{
+  "applications": "*",
+  "changelogDate": "20220222154937",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "import_organizations",
+  "fields": [
+    {
+      "fieldName": "orgMasterId",
+      "fieldType": "String",
+      "javadoc": "The firstname attribute."
+    },
+    {
+      "fieldName": "orgName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "partenaire",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "profile",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "launchCreationDate",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "fluentMethods": true,
+  "javadoc": "The Employee entity.",
+  "jpaMetamodelFiltering": false,
+  "name": "ImportOrganizations",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "organizationImported",
+      "otherEntityRelationshipName": "organizationImported",
+      "relationshipName": "organizationImported",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

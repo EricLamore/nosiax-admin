@@ -1,0 +1,262 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-organization-imported-heading" data-cy="OrganizationImportedCreateUpdateHeading">
+        Create or edit a Organization Imported
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_client">Client</label>
+          <input type="text" class="form-control" name="client" id="field_client" data-cy="client" formControlName="client" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_displayname">Displayname</label>
+          <input
+            type="text"
+            class="form-control"
+            name="displayname"
+            id="field_displayname"
+            data-cy="displayname"
+            formControlName="displayname"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_logo">Logo</label>
+          <input type="text" class="form-control" name="logo" id="field_logo" data-cy="logo" formControlName="logo" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_profileName">Profile Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="profileName"
+            id="field_profileName"
+            data-cy="profileName"
+            formControlName="profileName"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_consoSig">Conso Sig</label>
+          <input type="checkbox" class="form-check" name="consoSig" id="field_consoSig" data-cy="consoSig" formControlName="consoSig" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_consoTimes">Conso Times</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="consoTimes"
+            id="field_consoTimes"
+            data-cy="consoTimes"
+            formControlName="consoTimes"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_consoSeal">Conso Seal</label>
+          <input type="checkbox" class="form-check" name="consoSeal" id="field_consoSeal" data-cy="consoSeal" formControlName="consoSeal" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_technicalAccountCreation">Technical Account Creation</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="technicalAccountCreation"
+            id="field_technicalAccountCreation"
+            data-cy="technicalAccountCreation"
+            formControlName="technicalAccountCreation"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_isTechnicalAccountAdmin">Is Technical Account Admin</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="isTechnicalAccountAdmin"
+            id="field_isTechnicalAccountAdmin"
+            data-cy="isTechnicalAccountAdmin"
+            formControlName="isTechnicalAccountAdmin"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_isTechnicalAccount">Is Technical Account</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="isTechnicalAccount"
+            id="field_isTechnicalAccount"
+            data-cy="isTechnicalAccount"
+            formControlName="isTechnicalAccount"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_isOperator">Is Operator</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="isOperator"
+            id="field_isOperator"
+            data-cy="isOperator"
+            formControlName="isOperator"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_technicalAccountFirstname">Technical Account Firstname</label>
+          <input
+            type="text"
+            class="form-control"
+            name="technicalAccountFirstname"
+            id="field_technicalAccountFirstname"
+            data-cy="technicalAccountFirstname"
+            formControlName="technicalAccountFirstname"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_technicalAccountLastname">Technical Account Lastname</label>
+          <input
+            type="text"
+            class="form-control"
+            name="technicalAccountLastname"
+            id="field_technicalAccountLastname"
+            data-cy="technicalAccountLastname"
+            formControlName="technicalAccountLastname"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_technicalAccountMail">Technical Account Mail</label>
+          <input
+            type="text"
+            class="form-control"
+            name="technicalAccountMail"
+            id="field_technicalAccountMail"
+            data-cy="technicalAccountMail"
+            formControlName="technicalAccountMail"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_language">Language</label>
+          <select class="form-control" name="language" formControlName="language" id="field_language" data-cy="language">
+            <option [ngValue]="null"></option>
+            <option *ngFor="let language of languageValues" [value]="language">language</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_orgCreated">Org Created</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="orgCreated"
+            id="field_orgCreated"
+            data-cy="orgCreated"
+            formControlName="orgCreated"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_technicalAccountCreated">Technical Account Created</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="technicalAccountCreated"
+            id="field_technicalAccountCreated"
+            data-cy="technicalAccountCreated"
+            formControlName="technicalAccountCreated"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_consoCreated">Conso Created</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="consoCreated"
+            id="field_consoCreated"
+            data-cy="consoCreated"
+            formControlName="consoCreated"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_createDate">Create Date</label>
+          <div class="input-group">
+            <input
+              id="field_createDate"
+              data-cy="createDate"
+              type="text"
+              class="form-control"
+              name="createDate"
+              ngbDatepicker
+              #createDateDp="ngbDatepicker"
+              formControlName="createDate"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="createDateDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_organizationImported">Organization Imported</label>
+          <select
+            class="form-control"
+            id="field_organizationImported"
+            data-cy="organizationImported"
+            name="organizationImported"
+            formControlName="organizationImported"
+          >
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                importOrganizationsOption.id === editForm.get('organizationImported')!.value?.id
+                  ? editForm.get('organizationImported')!.value
+                  : importOrganizationsOption
+              "
+              *ngFor="let importOrganizationsOption of importOrganizationsSharedCollection; trackBy: trackImportOrganizationsById"
+            >
+              {{ importOrganizationsOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

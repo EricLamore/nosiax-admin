@@ -1,0 +1,100 @@
+{
+  "applications": "*",
+  "changelogDate": "20220222154938",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "organization_imported",
+  "fields": [
+    {
+      "fieldName": "client",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "displayname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "logo",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "profileName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "consoSig",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "consoTimes",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "consoSeal",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "technicalAccountCreation",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "isTechnicalAccountAdmin",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "isTechnicalAccount",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "isOperator",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "technicalAccountFirstname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "technicalAccountLastname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "technicalAccountMail",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "language",
+      "fieldType": "Language",
+      "fieldValues": "FRENCH,ENGLISH,SPANISH"
+    },
+    {
+      "fieldName": "orgCreated",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "technicalAccountCreated",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "consoCreated",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "createDate",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "OrganizationImported",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "importOrganizations",
+      "otherEntityRelationshipName": "organizationImported",
+      "relationshipName": "organizationImported",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

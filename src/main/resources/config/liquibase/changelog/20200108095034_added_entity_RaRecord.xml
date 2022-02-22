@@ -3,17 +3,15 @@
     xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
     xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd
                         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
-
-        <property name="autoIncrement" value="true"/>
 
     <!--
         Added the entity RaRecord.
     -->
     <changeSet id="20200108095034-1" author="jhipster">
         <createTable tableName="ra_record">
-            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+            <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="status" type="varchar(255)">
@@ -67,22 +65,19 @@
             <column name="reaso" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="signature_date" type="datetime">
+            <column name="signature_date" type="${datetimeType}">
                 <constraints nullable="true" />
             </column>
-            <column name="validation_date" type="datetime">
+            <column name="validation_date" type="${datetimeType}">
                 <constraints nullable="true" />
             </column>
-            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
-        <dropDefaultValue tableName="ra_record" columnName="signature_date" columnDataType="datetime"/>
-        <dropDefaultValue tableName="ra_record" columnName="validation_date" columnDataType="datetime"/>
+        <dropDefaultValue tableName="ra_record" columnName="signature_date" columnDataType="${datetimeType}"/>
+        <dropDefaultValue tableName="ra_record" columnName="validation_date" columnDataType="${datetimeType}"/>
     </changeSet>
 
-    <changeSet id="20200108095034-1-relations" author="jhipster">
-
-    </changeSet>
-    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
 
     <!--
         Load sample data generated with Faker.js
@@ -96,7 +91,8 @@
         <loadData
                   file="config/liquibase/fake-data/ra_record.csv"
                   separator=";"
-                  tableName="ra_record">
+                  tableName="ra_record"
+                  usePreparedStatements="true">
             <column name="id" type="numeric"/>
             <column name="status" type="string"/>
             <column name="id_user" type="string"/>
@@ -115,10 +111,9 @@
             <column name="transaction_status" type="string"/>
             <column name="profil_cpm" type="string"/>
             <column name="reaso" type="string"/>
-            <column name="signature_date" type="datetime"/>
-            <column name="validation_date" type="datetime"/>
-            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here, do not remove-->
+            <column name="signature_date" type="date"/>
+            <column name="validation_date" type="date"/>
+            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>
-
 </databaseChangeLog>
