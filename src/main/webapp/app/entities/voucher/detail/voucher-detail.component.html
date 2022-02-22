@@ -1,0 +1,42 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="voucher">
+      <h2 data-cy="voucherDetailsHeading"><span>Voucher</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ voucher.id }}</span>
+        </dd>
+        <dt><span>File Name</span></dt>
+        <dd>
+          <span>{{ voucher.fileName }}</span>
+        </dd>
+        <dt><span>Key</span></dt>
+        <dd>
+          <span>{{ voucher.key }}</span>
+        </dd>
+        <dt><span>Ra Record</span></dt>
+        <dd>
+          <div *ngIf="voucher.raRecord">
+            <a [routerLink]="['/ra-record', voucher.raRecord?.id, 'view']">{{ voucher.raRecord?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/voucher', voucher.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

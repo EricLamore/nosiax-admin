@@ -1,0 +1,13 @@
+export enum Status {
+  DRAFT = 'DRAFT',
+
+  TO_SIGN = 'TO_SIGN',
+
+  TO_VALIDATE = 'TO_VALIDATE',
+
+  VALIDATE = 'VALIDATE',
+
+  REJECTED = 'REJECTED',
+
+  FAILED = 'FAILED',
+}

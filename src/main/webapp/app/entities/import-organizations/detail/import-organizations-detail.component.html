@@ -1,0 +1,48 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="importOrganizations">
+      <h2 data-cy="importOrganizationsDetailsHeading"><span>Import Organizations</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ importOrganizations.id }}</span>
+        </dd>
+        <dt><span ngbTooltip="The firstname attribute.">Org Master Id</span></dt>
+        <dd>
+          <span>{{ importOrganizations.orgMasterId }}</span>
+        </dd>
+        <dt><span>Org Name</span></dt>
+        <dd>
+          <span>{{ importOrganizations.orgName }}</span>
+        </dd>
+        <dt><span>Partenaire</span></dt>
+        <dd>
+          <span>{{ importOrganizations.partenaire }}</span>
+        </dd>
+        <dt><span>Profile</span></dt>
+        <dd>
+          <span>{{ importOrganizations.profile }}</span>
+        </dd>
+        <dt><span>Launch Creation Date</span></dt>
+        <dd>
+          <span>{{ importOrganizations.launchCreationDate | formatMediumDate }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/import-organizations', importOrganizations.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>
