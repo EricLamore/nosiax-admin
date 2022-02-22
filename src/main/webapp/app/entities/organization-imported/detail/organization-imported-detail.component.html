@@ -1,0 +1,112 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="organizationImported">
+      <h2 data-cy="organizationImportedDetailsHeading"><span>Organization Imported</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ organizationImported.id }}</span>
+        </dd>
+        <dt><span>Client</span></dt>
+        <dd>
+          <span>{{ organizationImported.client }}</span>
+        </dd>
+        <dt><span>Displayname</span></dt>
+        <dd>
+          <span>{{ organizationImported.displayname }}</span>
+        </dd>
+        <dt><span>Logo</span></dt>
+        <dd>
+          <span>{{ organizationImported.logo }}</span>
+        </dd>
+        <dt><span>Profile Name</span></dt>
+        <dd>
+          <span>{{ organizationImported.profileName }}</span>
+        </dd>
+        <dt><span>Conso Sig</span></dt>
+        <dd>
+          <span>{{ organizationImported.consoSig }}</span>
+        </dd>
+        <dt><span>Conso Times</span></dt>
+        <dd>
+          <span>{{ organizationImported.consoTimes }}</span>
+        </dd>
+        <dt><span>Conso Seal</span></dt>
+        <dd>
+          <span>{{ organizationImported.consoSeal }}</span>
+        </dd>
+        <dt><span>Technical Account Creation</span></dt>
+        <dd>
+          <span>{{ organizationImported.technicalAccountCreation }}</span>
+        </dd>
+        <dt><span>Is Technical Account Admin</span></dt>
+        <dd>
+          <span>{{ organizationImported.isTechnicalAccountAdmin }}</span>
+        </dd>
+        <dt><span>Is Technical Account</span></dt>
+        <dd>
+          <span>{{ organizationImported.isTechnicalAccount }}</span>
+        </dd>
+        <dt><span>Is Operator</span></dt>
+        <dd>
+          <span>{{ organizationImported.isOperator }}</span>
+        </dd>
+        <dt><span>Technical Account Firstname</span></dt>
+        <dd>
+          <span>{{ organizationImported.technicalAccountFirstname }}</span>
+        </dd>
+        <dt><span>Technical Account Lastname</span></dt>
+        <dd>
+          <span>{{ organizationImported.technicalAccountLastname }}</span>
+        </dd>
+        <dt><span>Technical Account Mail</span></dt>
+        <dd>
+          <span>{{ organizationImported.technicalAccountMail }}</span>
+        </dd>
+        <dt><span>Language</span></dt>
+        <dd>
+          <span>{{ organizationImported.language }}</span>
+        </dd>
+        <dt><span>Org Created</span></dt>
+        <dd>
+          <span>{{ organizationImported.orgCreated }}</span>
+        </dd>
+        <dt><span>Technical Account Created</span></dt>
+        <dd>
+          <span>{{ organizationImported.technicalAccountCreated }}</span>
+        </dd>
+        <dt><span>Conso Created</span></dt>
+        <dd>
+          <span>{{ organizationImported.consoCreated }}</span>
+        </dd>
+        <dt><span>Create Date</span></dt>
+        <dd>
+          <span>{{ organizationImported.createDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span>Employee</span></dt>
+        <dd>
+          <div *ngIf="organizationImported.employee">
+            <a [routerLink]="['/import-organizations', organizationImported.employee?.id, 'view']">{{
+              organizationImported.employee?.id
+            }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/organization-imported', organizationImported.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

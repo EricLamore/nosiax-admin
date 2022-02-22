@@ -1,0 +1,87 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-import-organizations-heading" data-cy="ImportOrganizationsCreateUpdateHeading">Create or edit a Import Organizations</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_orgMasterId" ngbTooltip="The firstname attribute.">Org Master Id</label>
+          <input
+            type="text"
+            class="form-control"
+            name="orgMasterId"
+            id="field_orgMasterId"
+            data-cy="orgMasterId"
+            formControlName="orgMasterId"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_orgName">Org Name</label>
+          <input type="text" class="form-control" name="orgName" id="field_orgName" data-cy="orgName" formControlName="orgName" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_partenaire">Partenaire</label>
+          <input
+            type="text"
+            class="form-control"
+            name="partenaire"
+            id="field_partenaire"
+            data-cy="partenaire"
+            formControlName="partenaire"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_profile">Profile</label>
+          <input type="text" class="form-control" name="profile" id="field_profile" data-cy="profile" formControlName="profile" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_launchCreationDate">Launch Creation Date</label>
+          <div class="input-group">
+            <input
+              id="field_launchCreationDate"
+              data-cy="launchCreationDate"
+              type="text"
+              class="form-control"
+              name="launchCreationDate"
+              ngbDatepicker
+              #launchCreationDateDp="ngbDatepicker"
+              formControlName="launchCreationDate"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="launchCreationDateDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

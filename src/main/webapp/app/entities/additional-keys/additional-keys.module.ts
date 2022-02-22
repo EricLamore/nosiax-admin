@@ -1,21 +1,19 @@
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
-
-import { AdminNosiaxSharedModule } from 'app/shared/shared.module';
-import { AdditionalKeysComponent } from './additional-keys.component';
-import { AdditionalKeysDetailComponent } from './additional-keys-detail.component';
-import { AdditionalKeysUpdateComponent } from './additional-keys-update.component';
-import { AdditionalKeysDeleteDialogComponent } from './additional-keys-delete-dialog.component';
-import { additionalKeysRoute } from './additional-keys.route';
+import { SharedModule } from 'app/shared/shared.module';
+import { AdditionalKeysComponent } from './list/additional-keys.component';
+import { AdditionalKeysDetailComponent } from './detail/additional-keys-detail.component';
+import { AdditionalKeysUpdateComponent } from './update/additional-keys-update.component';
+import { AdditionalKeysDeleteDialogComponent } from './delete/additional-keys-delete-dialog.component';
+import { AdditionalKeysRoutingModule } from './route/additional-keys-routing.module';
 
 @NgModule({
-  imports: [AdminNosiaxSharedModule, RouterModule.forChild(additionalKeysRoute)],
+  imports: [SharedModule, AdditionalKeysRoutingModule],
   declarations: [
     AdditionalKeysComponent,
     AdditionalKeysDetailComponent,
     AdditionalKeysUpdateComponent,
-    AdditionalKeysDeleteDialogComponent
+    AdditionalKeysDeleteDialogComponent,
   ],
-  entryComponents: [AdditionalKeysDeleteDialogComponent]
+  entryComponents: [AdditionalKeysDeleteDialogComponent],
 })
-export class AdminNosiaxAdditionalKeysModule {}
+export class AdditionalKeysModule {}

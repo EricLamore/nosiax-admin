@@ -1,16 +1,14 @@
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
-
-import { AdminNosiaxSharedModule } from 'app/shared/shared.module';
-import { RaRecordComponent } from './ra-record.component';
-import { RaRecordDetailComponent } from './ra-record-detail.component';
-import { RaRecordUpdateComponent } from './ra-record-update.component';
-import { RaRecordDeleteDialogComponent } from './ra-record-delete-dialog.component';
-import { raRecordRoute } from './ra-record.route';
+import { SharedModule } from 'app/shared/shared.module';
+import { RaRecordComponent } from './list/ra-record.component';
+import { RaRecordDetailComponent } from './detail/ra-record-detail.component';
+import { RaRecordUpdateComponent } from './update/ra-record-update.component';
+import { RaRecordDeleteDialogComponent } from './delete/ra-record-delete-dialog.component';
+import { RaRecordRoutingModule } from './route/ra-record-routing.module';
 
 @NgModule({
-  imports: [AdminNosiaxSharedModule, RouterModule.forChild(raRecordRoute)],
+  imports: [SharedModule, RaRecordRoutingModule],
   declarations: [RaRecordComponent, RaRecordDetailComponent, RaRecordUpdateComponent, RaRecordDeleteDialogComponent],
-  entryComponents: [RaRecordDeleteDialogComponent]
+  entryComponents: [RaRecordDeleteDialogComponent],
 })
-export class AdminNosiaxRaRecordModule {}
+export class RaRecordModule {}

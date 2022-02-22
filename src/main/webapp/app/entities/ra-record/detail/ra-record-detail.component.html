@@ -1,0 +1,104 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="raRecord">
+      <h2 data-cy="raRecordDetailsHeading"><span>Ra Record</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ raRecord.id }}</span>
+        </dd>
+        <dt><span>Status</span></dt>
+        <dd>
+          <span>{{ raRecord.status }}</span>
+        </dd>
+        <dt><span>Id User</span></dt>
+        <dd>
+          <span>{{ raRecord.idUser }}</span>
+        </dd>
+        <dt><span>Identifier</span></dt>
+        <dd>
+          <span>{{ raRecord.identifier }}</span>
+        </dd>
+        <dt><span>Cert O</span></dt>
+        <dd>
+          <span>{{ raRecord.certO }}</span>
+        </dd>
+        <dt><span>Common Name</span></dt>
+        <dd>
+          <span>{{ raRecord.commonName }}</span>
+        </dd>
+        <dt><span>Zip Code</span></dt>
+        <dd>
+          <span>{{ raRecord.zipCode }}</span>
+        </dd>
+        <dt><span>Locality</span></dt>
+        <dd>
+          <span>{{ raRecord.locality }}</span>
+        </dd>
+        <dt><span>Country</span></dt>
+        <dd>
+          <span>{{ raRecord.country }}</span>
+        </dd>
+        <dt><span>Lastname</span></dt>
+        <dd>
+          <span>{{ raRecord.lastname }}</span>
+        </dd>
+        <dt><span>Firstname</span></dt>
+        <dd>
+          <span>{{ raRecord.firstname }}</span>
+        </dd>
+        <dt><span>Email</span></dt>
+        <dd>
+          <span>{{ raRecord.email }}</span>
+        </dd>
+        <dt><span>Phone</span></dt>
+        <dd>
+          <span>{{ raRecord.phone }}</span>
+        </dd>
+        <dt><span>Url</span></dt>
+        <dd>
+          <span>{{ raRecord.url }}</span>
+        </dd>
+        <dt><span>Id Transaction</span></dt>
+        <dd>
+          <span>{{ raRecord.idTransaction }}</span>
+        </dd>
+        <dt><span>Transaction Status</span></dt>
+        <dd>
+          <span>{{ raRecord.transactionStatus }}</span>
+        </dd>
+        <dt><span>Profil Cpm</span></dt>
+        <dd>
+          <span>{{ raRecord.profilCpm }}</span>
+        </dd>
+        <dt><span>Reaso</span></dt>
+        <dd>
+          <span>{{ raRecord.reaso }}</span>
+        </dd>
+        <dt><span>Signature Date</span></dt>
+        <dd>
+          <span>{{ raRecord.signatureDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Validation Date</span></dt>
+        <dd>
+          <span>{{ raRecord.validationDate | formatMediumDatetime }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/ra-record', raRecord.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>
