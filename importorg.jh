@@ -1,0 +1,58 @@
+/**
+ * The Employee entity.
+ */
+entity ImportOrganizations {
+	/**
+	* The firstname attribute.
+	*/
+	orgMasterId String,
+    orgName String,
+    partenaire String,
+    profile String,
+    launchCreationDate LocalDate,
+}
+
+entity OrganizationImported {
+	client String,
+	displayname String,
+    logo String,
+    profileName String,
+    consoSig Boolean,
+    consoTimes Boolean,
+    consoSeal Boolean,
+    technicalAccountCreation Boolean,
+    isTechnicalAccountAdmin Boolean,
+    isTechnicalAccount Boolean,
+    isOperator Boolean,
+    technicalAccountFirstname String,
+    technicalAccountLastname String,
+    technicalAccountMail String
+  	language Language,
+    orgCreated Boolean,
+    technicalAccountCreated Boolean,
+    consoCreated Boolean,
+    createDate LocalDate,
+}
+
+enum Language {
+    FRENCH, ENGLISH, SPANISH
+}
+
+
+// defining multiple OneToMany relationships with comments
+relationship OneToMany {
+	ImportOrganizations to OrganizationImported{organizationImported}
+	
+}
+
+// Set pagination options
+paginate ImportOrganizations, OrganizationImported with pagination
+
+// Use Data Transfer Objects (DTO)
+// dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl
+
+// Set an angular suffix
+// angularSuffix * with mySuffix

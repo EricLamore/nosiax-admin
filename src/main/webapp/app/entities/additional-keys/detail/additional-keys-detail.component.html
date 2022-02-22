@@ -1,0 +1,42 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="additionalKeys">
+      <h2 data-cy="additionalKeysDetailsHeading"><span>Additional Keys</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ additionalKeys.id }}</span>
+        </dd>
+        <dt><span>Key</span></dt>
+        <dd>
+          <span>{{ additionalKeys.key }}</span>
+        </dd>
+        <dt><span>Value</span></dt>
+        <dd>
+          <span>{{ additionalKeys.value }}</span>
+        </dd>
+        <dt><span>Ra Record</span></dt>
+        <dd>
+          <div *ngIf="additionalKeys.raRecord">
+            <a [routerLink]="['/ra-record', additionalKeys.raRecord?.id, 'view']">{{ additionalKeys.raRecord?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/additional-keys', additionalKeys.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>
